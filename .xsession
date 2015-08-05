@@ -12,7 +12,6 @@ xscreensaver &
 sshadd
 xautolock -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 udisks-glue --config .udisks-glue.conf &
-smbnetfs /home/cwage/mnt &
 xrdb ~/.Xresources
 xmodmap .Xmodmap
 #keepass2 &
