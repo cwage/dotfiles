@@ -1,0 +1,31 @@
+/addworld Dino dino.surly.org 6250
+/addworld -Ttiny.moo WP waterpoint.moo.mud.org 8301
+/addworld -Ttiny.moo LM lambda.moo.mud.org 8888
+/addworld JHM strawman.nop.com 1709
+/log -wWP /home/cwage/var/log/mud/WP.log
+/log -wDino /home/cwage/var/log/mud/Dino.log
+/log -wLM /home/cwage/var/log/mud/LM.log
+/log -wJHM /home/cwage/var/log/mud/JHM.log
+/hook SIGUSR1 = /log off%; /log -wWP /home/cwage/var/log/mud/WP.log%; /log -wDino /home/cwage/var/log/mud/Dino.log%; /log -wLM /home/cwage/var/log/mud/LM.log%; /log -wJHM /home/cwage/var/log/mud/JHM.log
+/quiet on
+/def tinyurl = /quote :| !"/home/cwage/bin/tinyurl.pl %{1}"
+/def match = /recall -mregexp 1- %{*}
+/def -wLM -mglob -ah -t"You exclaim*"
+/def -wLM -mglob -ah -t"You ask*"
+/def -wWP -mglob -ah -t"*Chris *"
+/def -wWP -mglob -ah -t"*Chris,*"
+/def -mglob -ah -t"*feddie*"
+/def -mglob -ah -t"*Fasteddie*"
+/def -mglob -ah -t"* FE *"
+/def -mglob -ah -t"* FE,*"
+/def -mglob -ah -t"*\"FE *"
+/def -mglob -ah -t"*\"FE,"
+/def -mglob -ah -t"You say*"
+/def -mglob -ah -t"You \[to *"
+/def -mglob -ah -t "*\[to you\]:*"
+;; New MCP 2.1!
+;
+;;/load /home/cwage/.tf/mcp-2/mcp21.tf
+;;/load /home/cwage/.tf/mcp-2/mcp-negotiate.tf
+;;/load /home/cwage/.tf/mcp-2/simpleedit.tf
+;;/load /home/cwage/.tf/mcp-2/local-edit.tf
