@@ -1,0 +1,47 @@
+[queue]
+name            =5x7 Qty.2
+hotkey          =
+formattype      =fixed
+settings        =current
+settingsfile    =
+ignorecrop      =true
+preserverotation=false
+preservecrop    =false
+autostart       =false
+partialpages    =false
+quality         =1
+
+[printer]
+name       =
+copies     =1
+colormode  =0
+pagesize   =0
+papersource=0
+orientation=0
+fileoutput =false
+filename   =
+
+[custom]
+filename=
+
+[fixed]
+width      =5000
+height     =7000
+picsperpage=0
+singleimage=false
+
+[nxm]
+rows   =4
+cols   =2
+insets =10
+bestfit=true
+
+[contact]
+rows          =4
+cols          =2
+insets        =10
+position      =1
+percentcaption=20
+caption       =caption
+bestfit       =false
+

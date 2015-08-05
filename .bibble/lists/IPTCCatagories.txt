@@ -1,0 +1,5 @@
+A - News or features
+F - Financial
+I - International
+S - Sports
+V - Advisories

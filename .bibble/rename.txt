@@ -1,0 +1,7 @@
+job name/seq|||[jobname][4jobseq][ext]
+job sequence|||[4jobseq][ext]
+queue sequence|||[4queseq][ext]
+small images|||small[4queseq][ext]
+default|||[oname][ext]
+browser default|||name[4rseq][oext]
+capture default||B[7cseq][oext]

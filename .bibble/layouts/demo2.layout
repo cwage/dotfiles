@@ -1,0 +1,65 @@
+[layout]
+name            =demo2
+
+[cell1]
+type         =image
+image        =0
+coordinates  =percent
+x            =200
+y            =0
+width        =600
+height       =400
+scalemode    =reduce
+autorotate   =true
+bestfit      =false
+renamestring =
+fontname     =
+fontsize     =
+
+
+[cell2]
+type        =caption
+image       =0
+coordinates  =percent
+x            =0
+y            =410
+width        =1000
+height       =70
+scalemode    =reduce
+autorotate   =true
+bestfit      =false
+renamestring =[ofullname]
+fontname     =
+fontsize     = 
+
+
+[cell3]
+type        =image
+image       =1
+coordinates  =percent
+x            =200
+y            =500
+width        =600
+height       =400
+scalemode    =reduce
+autorotate   =true
+bestfit      =false
+renamestring =
+fontname     =
+fontsize     = 
+
+[cell4]
+type        =caption
+image		=1
+coordinates  =percent
+x            =000
+y            =910
+width        =1000
+height       =70
+scalemode    =reduce
+autorotate   =true
+bestfit      =false
+renamestring =[ofullname]
+fontname     =
+fontsize     = 
+

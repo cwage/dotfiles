@@ -1,0 +1,253 @@
+ABW - Aruba
+AFG - Afghanistan
+AGO - Angola
+AIA - Anguilla
+ALB - Albania
+AND - Andorra
+ANT - Netherland Antilles
+ARC - Arctic
+ARE - United ArabEmer
+ARG - Argentina
+ARM - Armenia
+ASM - American Samoa
+ATA - Antarctica
+ATF - French South
+ATG - Antigua Barbuda
+AUS - Australia
+AUT - Austria
+AZE - Azerbaijan
+BDI - Burundi
+BEL - Belgium
+BEN - Benin
+BFA - Burkina Faso
+BGD - Bangladesh
+BGR - Bulgaria
+BHR - Bahrain
+BHS - Bahamas
+BIH - Bosnia/Herzegov.
+BLR - Belarus
+BLZ - Belize
+BMU - Bermuda
+BOL - Bolivia
+BRA - Brazil
+BRB - Barbados
+BRN - Brunei
+BTN - Bhutan
+BUR - Burma
+BVT - Bouvet Island
+BWA - Botswana
+CAF - Central Afr.Rep.
+CAN - Canada
+CCK - Cocos Islands
+CHE - Switzerland
+CHL - Chile
+CHN - China,Peop.Rep.
+CIV - Ivory Coast
+CMR - Cameroon
+COG - Congo
+COK - Cook Islands
+COL - Colombia
+COM - Comoro Islands
+CPV - CapeVerde Isls
+CRI - Costa Rica
+CUB - Cuba
+CXR - Christmas Island
+CYM - Cayman Islands
+CYP - Cyprus
+CZE - Czech Republic
+DEU - Germany
+DJI - Dijbouti
+DMA - Dominica
+DNK - Denmark
+DOM - Dominican Rep.
+DZA - Algeria
+ECU - Ecuador
+EGY - Egypt
+ESH - Western Sahara
+ESP - Spain
+EST - Estonia
+ETH - Ethiopia
+FIJ - Fiji Islands
+FIN - Finland
+FLK - Falkland Islands
+FRA - France
+FRO - Faroe Islands
+FSM - Micronesia
+FYM - Macedonia
+GAB - Gabon
+GBR - United Kingdom
+GEO - Georgia
+GHA - Ghana
+GIB - Gibraltar
+GIN - Guinea
+GLP - Guadeloupe
+GMB - Gambia
+GNB - Guinea-Bisseau
+GNQ - EquatorialGuinea
+GRC - Greece
+GRD - Grenada
+GRL - Greenland
+GTM - Guatemala
+GUF - French Guyana
+GUM - Guam
+GUY - Guayana
+GZA - Gaza
+HKG - HongKong
+HMD - Heard McDonald
+HND - Honduras
+HTI - Haiti
+HUN - Hungary
+HVR - Croatia
+IDN - Indonesia
+IND - India
+IOT - BritishIndian Ocn
+IRL - Ireland, Rep.of
+IRN - Iran
+IRQ - Iraq
+ISL - Iceland
+ISR - Israel
+ITA - Italy
+JAM - Jamaica
+JOR - Jordan
+JPN - Japan
+JRO - Jericho
+KAZ - Kazakhstan
+KEN - Kenya
+KGZ - Kyrgyzstan
+KHM - Cambodia
+KIR - Kiribati
+KNA - St. Kitts-Nevis
+KOR - South Korea
+KWT - Kuwait
+LAO - Laos
+LBN - Lebanon
+LBR - Liberia
+LBY - Libya
+LCA - St. Lucia
+LIE - Liechtenstein
+LKA - Sri Lanka
+LSO - Lesotho
+LTU - Lithuania
+LUX - Luxembourg
+LVA - Latvia
+MAC - Macao
+MAR - Morocco
+MCO - Monaco
+MDA - Moldova
+MDG - Madagascar
+MDV - Maldives
+MEX - Mexico
+MHL - Marshall Islands
+MLI - Mali
+MLT - Malta
+MNG - Mongolia
+MNP - Northern Marianas
+MOZ - Mozambique
+MRT - Mauritania
+MSR - Montserrat
+MTQ - Martinique
+MUS - Mauritius
+MWI - Malawi
+MYS - Malaysia
+NAM - Namibia
+NCL - New Caledonia
+NER - Niger
+NFK - Norfolk Island
+NGA - Nigeria
+NIC - Nicaragua
+NIU - Niue
+NLD - Netherlands,The
+NOR - Norway
+NPL - Nepal
+NRU - Nauru
+NTZ - Neutral Zone
+NZL - New Zealand
+OMN - Oman
+PAK - Pakistan
+PAN - Panama
+PCN - Pitcairn
+PER - Peru
+PHL - Philippines
+PLW - Palau
+PNG - Papua N.Guinea
+POL - Poland
+PRI - Puerto Rico
+PRK - North Korea
+PRT - Portugal
+PRY - Paraguay
+PSE - Palestine
+PYF - French Polynesia
+QAT - Qatar
+REU - Reunion
+ROM - Romania
+RUS - Russia
+RWA - Rwanada
+SAU - Saudi Arabia
+SAW - Western Samoa
+SDN - Sudan
+SEN - Senegal
+SGP - Singapore
+SHN - St. Helena
+SJM - Svalbard Jan Mayen
+SLB - Solomon Islands
+SLE - Sierra Leone
+SLV - El Salvador
+SMR - San Marino
+SOM - Somalia
+SPM - St. Pierre Miquelon
+STP - Sotom&Princ.
+SUR - Suriname
+SVK - Slovak Republic
+SVN - Slovenia
+SWE - Sweden
+SWZ - Swaziland
+SYC - Seychelles
+SYR - Syria
+TCA - Turks/CaicosIsl.
+TCD - Chad
+TGA - Tonga
+TGO - Togo
+THA - Thailand
+TJK - Tajikistan
+TKL - Tokelau
+TKM - Turkmenistan
+TMP - EastTimor
+TTO - Trinidad/Tobago
+TUN - Tunisia
+TUR - Turkey
+TUV - Tuvalu
+TWN - Taiwan
+TZA - Tanzania
+UGA - Uganda
+UKR - Ukraine
+UMI - U.S.Outlying Isls
+URY - Uruguay
+USA - United States
+UZB - Uzbekistan
+VAT - Vatican City
+VCT - St.Vincent/Gren.
+VEN - Venezuela
+VGB - British Virgin Isls
+VIR - U.S.Virgin Isl.
+VNM - Vietnam
+VUT - Vanatu
+WLF - Wallisand Futuna
+XAR - Arctic
+XEN - England
+XEU - European Union
+XIF - In Flight
+XNI - Northern Ireland
+XNI - Northern Ireland
+XSC - Scotland
+XSE - At Sea
+XSP - Outer Space
+XUN - United Nations
+XWA - Wales
+YEM - Yemen Arab Rep.
+YMD - Yemen Dem.Peop
+YUG - Yugoslavia
+ZAF - South Africa
+ZAR - Zaire
+ZMB - Zambia
+ZWE - Zimbabwe
+ZZZ - Unknown country
