@@ -1,0 +1,15 @@
+folder-hook . ignore *
+folder-hook . unignore From:
+folder-hook . unignore To:
+folder-hook . unignore Subject:
+folder-hook . unignore Date:
+folder-hook . unignore Organization:
+folder-hook . unignore Newsgroups:
+folder-hook . unignore CC:
+folder-hook . ignore BCC:
+folder-hook . unignore X-Mailer:
+folder-hook . unignore X-Junked-Because:
+
+folder-hook . hdr_order From: Subject: To: CC: BCC: Date: Organization: X-Mailer:
+folder-hook . set sort=threads
+

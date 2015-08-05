@@ -1,0 +1,15 @@
+### Personalized information specific to my account
+
+source "~/.mutt/profile"
+
+source "~/.mutt/options.muttrc"
+
+source "~/.mutt/folders.muttrc"
+
+source "~/.mutt/colors.muttrc"
+
+source "~/.mutt/kb.muttrc"
+
+source "~/.mutt/aliases"
+alias scott Scott HoldrenkkiE <scott@raventools.com>
+alias rockocs rockocs@gmail.com
