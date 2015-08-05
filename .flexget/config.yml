@@ -1,0 +1,107 @@
+templates:
+  tv:
+
+#    manipulate:
+#      - title: &the
+#          replace:
+#            regexp: '^The\W'
+#            format: ''
+#      - filename: *the
+#      - series_name: *the
+
+    private_torrents: no
+
+    series:
+      settings:
+        tv:
+          exact: yes
+          propers: 3 days
+          quality: 720p+
+          set:
+            path: /mnt/Video/Television/{{series_name}}
+      tv:
+        - Game of Thrones
+        - Gotham
+        - Masters of Sex
+        - Outlander
+        - Vikings
+        - Bob's Burgers
+        - Rick and Morty
+        - True Detective
+        - Mr Robot
+
+
+    transmission:
+      enabled: yes
+      host: localhost
+      port: 9091
+      username: transmission
+      password: butts
+
+tasks:
+#  bt-chat.com-tv:
+#    priority: 1
+#    rss: http://rss.bt-chat.com/?group=3
+#    template: tv
+#
+#  ezrss.it:
+#    priority: 2
+#    rss: http://ezrss.it/feed/
+#    template: tv
+#
+#  thepiratebay.org-tv:
+#    priority: 3
+#    rss: http://rss.thepiratebay.org/208
+#    template: tv
+#    verify_ssl_certificates: no
+#
+#  kat.ph-tv:
+#    priority: 4
+#    rss: http://kat.ph/tv/?rss=1
+#    template: tv
+#
+#  extratorrent.com-tv:
+#    priority: 5
+#    rss: http://extratorrent.com/rss.xml?cid=8
+#    template: tv
+#
+  gotham:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=gotham
+    template: tv
+  archer:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=archer
+    template: tv
+  gameofthrones:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=game%20of%20thrones
+    template: tv
+  mastersofsex:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=masters%20of%20sex
+    template: tv
+  outlander:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=outlander
+    template: tv
+  vikings:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=vikings
+    template: tv
+  bobsburgers:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=Bob's%20Burgers
+    template: tv
+  rickandmorty:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=rick%20and%20morty
+    template: tv
+  truedetective:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=true%20detective
+    template: tv
+  mrrobot:
+    priority: 6
+    rss: https://torrentz.eu/feed?verified&q=mr%20robot
+    template: tv
