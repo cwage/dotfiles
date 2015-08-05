@@ -1,0 +1,47 @@
+;;;
+;;; Put something like this in you .sawfishrc. This will automatically
+;;; fire up a pager when you startx.
+;;;
+
+  (setq load-path (cons "~/.sawfish/lisp" load-path))
+(require 'debian-menu)
+;;(require 'crossover-menu)
+#(require 'sawfish.wm.ext.pager)
+#(add-hook 'after-initialization-hook pager t)
+
+(setq root-menu  '(
+		("xterm" (system "aterm -g 80x24 -bg 7 -fade 50 +sb -tn xterm &"))
+		("Mozilla" (system "mozilla &"))
+		("Firefox" (system "mozilla-firefox &"))
+		("Opera" (system "~/bin/opera &"))
+		("gaim" (system "gaim &"))
+		("pidgin" (system "pidgin &"))
+		("psi" (system "psi &"))
+		("Tkabber" (system "tkabber &"))
+		("vmware" (system "ssh -X -C shkaf vmware &"))
+		("liferea" (system "liferea &"))
+		()
+		("pptpconfig" (system "sudo pptpconfig &"))
+		()
+		;;("Programs" . debian-apps-menu)
+		("Programs" . debian-menu)
+ 		("Workspaces" . workspace-menu)
+		("Windows" . window-menu)
+		("Customize" . custom-menu)
+		()
+		("Restart" restart)
+		;;("Quit" quit)))
+		("Quit" (system "killall -9 aterm &"))))
+
+;;(system "gkrellm &")
+;;(system "wmbiff &")
+;;(system "aterm -ls -g 80x24 -bg 7 -fade 50 +sb -tn xterm -fn fixed &")
+;;(system "aterm +ls -g 80x24 -bg 7 -fade 50 +sb -tn xterm -fn fixed -e screen -d -R mail -c /home/cwage/etc/mail.screenrc &")
+;;(system "aterm +ls -g 80x24 -bg 7 -fade 50 +sb -tn xterm -fn fixed -e screen -d -R garbage -c /home/cwage/etc/garbage.screenrc &")
+;;(system "xautolock -locker ~/bin/xscreensaver-lock -time 2 -corners +000 -cornerdelay 2 &")
+;;(system "aterm -title login -ls &")
+;;(system "aterm -title mail +ls -e screen -d -R mail -c /home/cwage/etc/mail.screenrc &")
+;;(system "aterm -title garbage +ls -e screen -d -R garbage -c /home/cwage/etc/garbage.screenrc &")
+;;(system "ssh-add ~/.ssh/ena ~/.ssh/personal &")
+(setq resize-outline-mode 'box 'symbol)
+(setq move-outline-mode  'box 'symbol) 
