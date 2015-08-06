@@ -34,6 +34,7 @@ then
 fi
 
 alias xmms=xmms2
+alias sshadd=ssh-add
 
 
 # it'll change your life man
