@@ -35,6 +35,7 @@ fi
 
 alias xmms=xmms2
 alias sshadd="ssh-add ~/.ssh/id_ecdsa ~/.ssh/opensky_rsa"
+alias ssh="cat ~/.ssh/config.d/* > ~/.ssh/config; ssh"
 
 
 # it'll change your life man
