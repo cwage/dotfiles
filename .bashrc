@@ -34,7 +34,7 @@ then
 fi
 
 alias xmms=xmms2
-alias sshadd=ssh-add
+alias sshadd="ssh-add ~/.ssh/id_ecdsa ~/.ssh/opensky_rsa"
 
 
 # it'll change your life man
