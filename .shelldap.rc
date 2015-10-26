@@ -1,0 +1,5 @@
+server: mldap.nyc.opensky.com
+binddn: uid=cwage,ou=people,dc=opensky,dc=com
+bindpass:
+basedn: dc=opensky,dc=com
+tls: yes
