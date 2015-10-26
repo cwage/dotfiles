@@ -7,7 +7,7 @@ nm-applet &
 xmms2d &
 gnome-screensaver &
 #xscreensaver &
-ssh-add
+sshadd
 xautolock -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 udisks-glue --config .udisks-glue.conf &
 xrdb ~/.Xresources
@@ -15,4 +15,5 @@ xmodmap .Xmodmap
 awesome -c ~/.config/awesome/rc.lua &
 ~/.dropbox-dist/dropboxd &
 smbnetfs ~/smb &
+diodon &
 exec gkrellm
