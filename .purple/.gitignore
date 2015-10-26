@@ -8,3 +8,4 @@ otr.instance_tags
 otr.private_key
 status.xml
 xmpp-caps.xml
+prefs.xml
