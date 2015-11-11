@@ -1,0 +1,4 @@
+URI ldaps://mldap.nyc.opensky.com
+BASE dc=opensky,dc=com
+BINDDN uid=cwage,ou=people,dc=opensky,dc=com
+TLS_REQCERT never
