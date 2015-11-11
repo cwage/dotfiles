@@ -42,3 +42,5 @@ alias ssh="cat ~/.ssh/config.d/* > ~/.ssh/config; ssh"
 alias Grep=grep
 
 alias xterm="xterm -ls -mc 200"
+
+alias ldapsearch="ldapsearch -x -W"
