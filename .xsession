@@ -7,7 +7,7 @@ nm-applet &
 xmms2d &
 gnome-screensaver &
 #xscreensaver &
-sshadd
+ssh-add
 xautolock -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 udisks-glue --config .udisks-glue.conf &
 xrdb ~/.Xresources
