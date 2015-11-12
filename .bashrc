@@ -24,7 +24,7 @@ fi
 
 
 # Path
-export PATH=~/bin:$PATH:/usr/sbin:/usr/local/sbin:/sbin
+export PATH=~/bin:~/bin/os:$PATH:/usr/sbin:/usr/local/sbin:/sbin
 
 
 # Include any machine-specific config
