@@ -15,5 +15,6 @@ awesome -c ~/.config/awesome/rc.lua &
 ~/.dropbox-dist/dropboxd &
 smbnetfs ~/smb &
 diodon &
+afuse -o mount_template="sshfs %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/ &
 ssh-add
 exec gkrellm
