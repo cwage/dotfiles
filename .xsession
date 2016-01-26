@@ -5,16 +5,17 @@ xinput set-prop 11 249 1 &
 unity-settings-daemon &
 nm-applet &
 xmms2d &
-gnome-screensaver &
-#xscreensaver &
+#gnome-screensaver &
+xscreensaver &
 xautolock -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 udisks-glue --config .udisks-glue.conf &
 xrdb ~/.Xresources
 xmodmap .Xmodmap
-awesome -c ~/.config/awesome/rc.lua &
 ~/.dropbox-dist/dropboxd &
 smbnetfs ~/smb &
 diodon &
-afuse -o mount_template="sshfs %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/ &
-ssh-add
-exec gkrellm
+#afuse -o mount_template="sshfs %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/ &
+#ssh-add
+volumeicon &
+alltray gkrellm &
+exec awesome -c ~/.config/awesome/rc.lua
