@@ -24,7 +24,7 @@ fi
 
 
 # Path
-export PATH=~/bin:~/bin/os:$PATH:/usr/sbin:/usr/local/sbin:/sbin
+export PATH=~/bin:~/bin/os:$PATH:/usr/sbin:/usr/local/sbin:/sbin:~/goprojects/bin
 
 
 # Include any machine-specific config
@@ -43,3 +43,5 @@ alias Grep=grep
 alias xterm="xterm -ls -mc 200"
 
 alias ldapsearch="ldapsearch -x -W"
+
+export GOPATH=/home/cwage/goprojects
