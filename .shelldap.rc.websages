@@ -1,0 +1,5 @@
+server: ldaps://freyr.websages.com
+binddn: uid=cwage,ou=People,dc=websages,dc=com
+bindpass:
+basedn: dc=websages,dc=com
+editor: /home/cwage/bin/vi
