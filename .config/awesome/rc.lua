@@ -46,7 +46,7 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm -ls -mc 200"
+terminal = "uxterm -ls -mc 200"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -110,13 +110,25 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
+batterywidget = wibox.widget.textbox()    
+batterywidget:set_text(" | Battery | ")    
+batterywidgettimer = timer({ timeout = 5 })    
+batterywidgettimer:connect_signal("timeout",    
+  function()    
+    fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
+    batterywidget:set_text(" |" .. fh:read("*l") .. " | ")    
+    fh:close()    
+  end    
+)    
+batterywidgettimer:start()
+
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+mytextclock = awful.widget.textclock("%a %b %d, %I:%M", 60)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -197,6 +209,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(batterywidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -244,15 +257,19 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
+				function ()
+					awful.client.focus.byidx( 1)
+					if client.focus then client.focus:raise() end
+				end),
+		awful.key({ "Mod1", "Shift"   }, "Tab",
+				function ()
+					awful.client.focus.byidx( -1)
+					if client.focus then client.focus:raise() end
+				end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, "Control" }, "Return", function () awful.util.spawn("/home/cwage/bin/startterms.sh") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -268,7 +285,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
     
     -- Custom
-    awful.key({ modkey }, "\\", function () awful.util.spawn_with_shell("xmms2 toggleplay") end),
+    awful.key({ modkey }, "\\", function () awful.util.spawn_with_shell("xmms2 toggle") end),
     awful.key({ modkey }, "[", function () awful.util.spawn_with_shell("xmms2 prev") end),
     awful.key({ modkey }, "]", function () awful.util.spawn_with_shell("xmms2 next") end),
     awful.key({ modkey }, "i", function () awful.util.spawn_with_shell("/home/cwage/bin/nowplaying.sh > /home/cwage/tmp/out 2>&1") end),
@@ -397,6 +414,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
    { rule = { class = "Pidgin" },
+     properties = { tag = tags[1][3] } },
+   { rule = { class = "ricochet" },
      properties = { tag = tags[1][3] } },
     { rule = { name = "gkrellm (AllTray)" },
       properties = { border_width = 0,
