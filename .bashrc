@@ -1,3 +1,9 @@
+# if we have GNU ls, do color stuff
+if ls --color -d . >/dev/null 2>&1; then
+  eval "$(dircolors ~/.dir_colors)"
+	alias ls='ls --color=auto'
+fi
+
 # Fancy prompt
 PS1='\u@\h:\w\$ '
 
