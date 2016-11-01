@@ -5,11 +5,11 @@ set autoindent          " always set autoindenting on
 set smartindent
 set nobackup            " Don't keep a backup file
 set esckeys
-set ts=2
+set ts=4
 set textwidth=75
 set formatoptions=tcroql
 set shiftwidth=2
-set expandtab
+set noexpandtab
 syntax on
 set viminfo='20,\"500
 set history=1000          " keep 50 lines of command line history
