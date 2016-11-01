@@ -33,7 +33,7 @@ values."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     spell-checking
+     ;; spell-checking
      syntax-checking
      version-control
      puppet
@@ -247,6 +247,14 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (spacemacs/toggle-highlight-current-line-globally-off)
+  (spacemacs/toggle-highlight-indentation-on)
+  (setq puppet-indent-level 4)
+  (setq puppet-include-indent 4)
+  (setq vc-follow-symlinks t)
+  (setq tab-width 4)
+  (setq global-evil-search-highlight-persist nil)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
