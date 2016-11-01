@@ -1,11 +1,6 @@
-# I like pretty colors
-if [ -x /usr/bin/dircolors ]; then
-	eval `/usr/bin/dircolors -b`
-fi
-
 # if we have GNU ls, do color stuff
-if ls --version | grep 'Free Software Foundation' > /dev/null; then
-  eval `dircolors ~/.dir_colors`
+if ls --color -d . >/dev/null 2>&1; then
+  eval "$(dircolors ~/.dir_colors)"
 	alias ls='ls --color=auto'
 fi
 
@@ -18,14 +13,9 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Fancy xterm titles
-if [ -z "$PROMPT_COMMAND" ] && [ $TERM == 'xterm' ]; then
+if [ -z "$PROMPT_COMMAND" ] && [ "$TERM" == 'xterm' ]; then
 	export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 fi
-
-
-# Path
-export PATH=~/bin:~/bin/os:$PATH:/usr/sbin:/usr/local/sbin:/sbin:~/goprojects/bin
-
 
 # Include any machine-specific config
 if [ -f ~/.bashrc.local ]
@@ -33,15 +23,12 @@ then
 . ~/.bashrc.local
 fi
 
-alias xmms=xmms2
-alias ssh="cat ~/.ssh/config.d/* > ~/.ssh/config; ssh"
-
-
 # it'll change your life man
 alias Grep=grep
 
-alias xterm="xterm -ls -mc 200"
-
 alias ldapsearch="ldapsearch -x -W"
 
-export GOPATH=/home/cwage/goprojects
+export EDITOR="vi"
+
+# close shell if hour of activity
+export TMOUT=3600
