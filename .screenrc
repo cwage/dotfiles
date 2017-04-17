@@ -3,8 +3,8 @@ deflogin off
 defbce on
 
 # Make sure screen talks to /tmp/ssh-agent-sock-screen for SSH authorization
-#unsetenv SSH_AUTH_SOCK
-#setenv SSH_AUTH_SOCK /tmp/ssh-agent-sock-screen
+unsetenv SSH_AUTH_SOCK
+setenv SSH_AUTH_SOCK /tmp/ssh-agent-sock-screen
 
 # use PROMPT_COMMAND and some nasty ANSI to cram useful info into the titlebar
 setenv PROMPT_COMMAND 'echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
