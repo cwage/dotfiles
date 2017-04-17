@@ -4,7 +4,10 @@ export PATH=~/bin:~/bin/os:$PATH:/usr/sbin:/usr/local/sbin:/sbin:~/goprojects/bi
 alias xmms=xmms2
 alias ssh="cat ~/.ssh/config.d/* > ~/.ssh/config; ssh"
 
-alias xterm="uxterm -ls -mc 200"
+alias xterm="uxterm -class XTerm -ls -mc 200"
+
+alias ansible="ansible -i ~/.ansible/hosts"
+alias ansible-playbook="ansible-playbook -i ~/.ansible/hosts"
 
 export GOPATH=/home/cwage/goprojects
 
@@ -20,3 +23,5 @@ source '/home/cwage/Downloads/Opensky/google-cloud-sdk/path.bash.inc'
 
 # The next line enables shell command completion for gcloud.
 source '/home/cwage/Downloads/Opensky/google-cloud-sdk/completion.bash.inc'
+
+alias curlbrowser="curl -k -L -I -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'"
