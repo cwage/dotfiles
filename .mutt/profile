@@ -11,8 +11,5 @@ set smtp_url="smtp://cwage@felix.quietlife.net:465/"
 set header_cache = "/home/cwage/tmp/mutt/cache"
 set message_cachedir = "/home/cwage/tmp/mutt/cache"
 
-mailboxes =
-mailboxes =urticaria
-mailboxes =eastnash
-mailboxes =Archive
+mailboxes =bulk
 mailboxes =spam
