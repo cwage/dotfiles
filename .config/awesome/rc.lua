@@ -46,7 +46,7 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "uxterm -ls -mc 200"
+terminal = "uxterm -class XTerm -ls -mc 200"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -62,16 +62,16 @@ local layouts =
 {
     awful.layout.suit.max,
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+--     awful.layout.suit.tile,
+--     awful.layout.suit.tile.left,
+--     awful.layout.suit.tile.bottom,
+--     awful.layout.suit.tile.top,
+--     awful.layout.suit.fair,
+--     awful.layout.suit.fair.horizontal,
+--     awful.layout.suit.spiral,
+--     awful.layout.suit.spiral.dwindle,
+--     awful.layout.suit.max.fullscreen,
+--     awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -395,7 +395,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
-    { rule = { class = "gimp" },
+    { rule = { class = "Gimp" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
@@ -408,20 +408,6 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "xpad" },
      properties = { ontop = true, skip_taskbar = true, floating = true, sticky = true } },
-    { rule = { class = "Everpad" },
-     properties = { ontop = true, skip_taskbar = true, floating = true, sticky = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-   { rule = { class = "Pidgin" },
-     properties = { tag = tags[1][3] } },
-   { rule = { class = "ricochet" },
-     properties = { tag = tags[1][3] } },
-    { rule = { name = "gkrellm (AllTray)" },
-      properties = { border_width = 0,
-                     skip_taskbar = true,
-                     sticky = true,
-                     floating = true } },
 
 
 }
