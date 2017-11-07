@@ -11,17 +11,22 @@ alias ansible-playbook="ansible-playbook -i ~/.ansible/hosts"
 
 export GOPATH=/home/cwage/goprojects
 
-export EDITOR="vi"
+export EDITOR="ec"
 
 # add rbenv to path
 export PATH=$HOME/.rbenv/bin:$PATH
-
 eval "$(rbenv init -)"
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/home/cwage/Downloads/Opensky/google-cloud-sdk/path.bash.inc'
 
-# The next line enables shell command completion for gcloud.
-source '/home/cwage/Downloads/Opensky/google-cloud-sdk/completion.bash.inc'
 
 alias curlbrowser="curl -k -L -I -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'"
+
+#alias navicli="wine .wine/drive_c/Program\ Files\ \(x86\)/EMC/Navisphere\ CLI/NaviSECCli.exe -Scope 0 -User sysadmin -Password '!#PlinnarB95' -Address dc1ossan01a.prod.opensky.com"
+
+alias e="emacsclient -t -a ''"
+alias eb="emacsbare"
+alias ec="emacsclient -c -n -a ''"
+alias emacsbare="emacs -nw -Q --eval \"(load-theme 'misterioso)\""
+alias vim="ec"
+alias vi="ec"
+alias gpg=gpg2
