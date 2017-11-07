@@ -10,7 +10,7 @@ xscreensaver &
 xautolock -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 udisks-glue --config .udisks-glue.conf &
 xrdb ~/.Xresources
-#xmodmap .Xmodmap
+xmodmap .Xmodmap
 ~/.dropbox-dist/dropboxd &
 #smbnetfs ~/smb &
 #diodon &
