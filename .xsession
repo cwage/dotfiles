@@ -16,11 +16,12 @@ xmodmap .Xmodmap
 #diodon &
 #afuse -o mount_template="sshfs %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/ &
 #ssh-add
-emacs --daemon &
+/usr/local/bin/emacs --daemon &
 volumeicon &
 shutter &
 syncthing &
 #fluxgui &
+gkrellm &
 redshift-gtk &
 killall -9 syndaemon && syndaemon -i 0.2 -K -R &
 exec awesome -c ~/.config/awesome/rc.lua
