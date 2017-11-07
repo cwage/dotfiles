@@ -30,8 +30,8 @@ alias ldapsearch="ldapsearch -x -W"
 
 export EDITOR="vi"
 
-# close shell if hour of activity
-export TMOUT=3600
+# close shell if hour of activity for non-login shells
+#shopt -q login_shell || export TMOUT=300
 
 alias curlbrowser='curl -k -L -I -A '\''Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'\'''
 

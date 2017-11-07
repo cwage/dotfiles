@@ -67,7 +67,7 @@ local layouts =
 --     awful.layout.suit.tile.bottom,
 --     awful.layout.suit.tile.top,
 --     awful.layout.suit.fair,
---     awful.layout.suit.fair.horizontal,
+     awful.layout.suit.fair.horizontal,
 --     awful.layout.suit.spiral,
 --     awful.layout.suit.spiral.dwindle,
 --     awful.layout.suit.max.fullscreen,
@@ -257,6 +257,8 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "Return", function () awful.util.spawn("/home/cwage/bin/startterms.sh") end),
+    awful.key({ modkey, }, "c", function () awful.util.spawn("uxterm -class XTerm -e 'screen -d -R code'") end),
+    awful.key({ modkey, "Control" }, "e", function () awful.util.spawn("emacsclient -c -n -a ''") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -273,11 +275,13 @@ globalkeys = awful.util.table.join(
     
     -- Custom
     awful.key({ modkey }, "\\", function () awful.util.spawn_with_shell("xmms2 toggle") end),
+    awful.key({ modkey, "Shift" }, "m", function () awful.util.spawn_with_shell("/home/cwage/test2.sh > /tmp/wtf 2>&1") end),
     awful.key({ modkey }, "[", function () awful.util.spawn_with_shell("xmms2 prev") end),
     awful.key({ modkey }, "]", function () awful.util.spawn_with_shell("xmms2 next") end),
     awful.key({ modkey }, "i", function () awful.util.spawn_with_shell("/home/cwage/bin/nowplaying.sh > /home/cwage/tmp/out 2>&1") end),
     awful.key({ modkey }, "l", function () awful.util.spawn_with_shell("~/bin/xscreensaver-lock") end),
     awful.key({ modkey }, "t", function () awful.util.spawn_with_shell("synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')") end),
+    awful.key({ modkey }, "g", function () awful.util.spawn_with_shell("/home/cwage/bin/togglegkrellm") end),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
