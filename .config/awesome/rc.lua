@@ -284,7 +284,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "g", function () awful.util.spawn_with_shell("/home/cwage/bin/togglegkrellm") end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen.index]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
