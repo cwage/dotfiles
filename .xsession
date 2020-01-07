@@ -12,4 +12,5 @@ xmodmap .Xmodmap
 volumeicon &
 flameshot &
 redshift-gtk &
+/home/cwage/bin/dbus.sh &
 exec awesome -c ~/.config/awesome/rc.lua
