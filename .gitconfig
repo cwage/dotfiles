@@ -1,0 +1,6 @@
+[user]
+	email = cwage@quietlife.net
+	name = cwage
+	
+[remind]
+	paths = /home/cwage/git/cwage/*,/home/cwage/git/kindful/*
