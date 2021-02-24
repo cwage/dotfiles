@@ -3,7 +3,6 @@ xset m 1/8 2
 xinput set-prop 11 249 1 &
 nm-applet &
 xmms2d &
-#gnome-screensaver &
 xscreensaver &
 xautolock -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 xrdb ~/.Xresources

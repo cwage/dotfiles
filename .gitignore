@@ -1,2 +1,7 @@
 .purple/accels
 .config/xmms2
+.fonts/.uuid
+.gnupg/private-keys-v1.d/
+.gnupg/pubring.kbx
+.gnupg/reader_0.status
+.gnupg/sshcontrol
