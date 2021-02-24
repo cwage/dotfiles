@@ -1,4 +1,3 @@
 user: cwage
 password: dGEccO9hnW53
-handshake_url: http://post.audioscrobbler.com
-
+handshake_url: http://ws.audioscrobbler.com/2.0/
