@@ -234,8 +234,8 @@ globalkeys = awful.util.table.join(
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+    end),
+    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -275,6 +275,7 @@ globalkeys = awful.util.table.join(
     
     -- Custom
     awful.key({ modkey }, "\\", function () awful.util.spawn_with_shell("xmms2 toggle") end),
+    awful.key({ modkey }, "'", function () awful.util.spawn_with_shell("randomalbum.sh") end),
     awful.key({ modkey, "Shift" }, "m", function () awful.util.spawn_with_shell("/home/cwage/test2.sh > /tmp/wtf 2>&1") end),
     awful.key({ modkey }, "[", function () awful.util.spawn_with_shell("xmms2 prev") end),
     awful.key({ modkey }, "]", function () awful.util.spawn_with_shell("xmms2 next") end),
