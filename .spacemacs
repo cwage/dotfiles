@@ -18,6 +18,9 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     python
+     csv
+     lua
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -25,11 +28,12 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      better-defaults
+     colors
      emacs-lisp
      git
      go
      markdown
-     org
+     (org :variables org-enable-github-support t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -38,6 +42,17 @@ values."
      version-control
      puppet
      github
+     html
+     javascript
+     ;; php
+     shell-scripts
+     evil-commentary
+     vinegar
+     sql
+     yaml
+     terraform
+     ruby
+     rails
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -45,7 +60,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -66,12 +81,12 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. (default t)
-   dotspacemacs-check-for-update nil
+   dotspacemacs-check-for-update t
    ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
    ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
    ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
@@ -89,7 +104,7 @@ values."
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'.
    ;; (default '(recents projects))
-   dotspacemacs-startup-lists '(recents projects)
+   dotspacemacs-startup-lists '(projects recents)
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 5
@@ -144,7 +159,7 @@ values."
    dotspacemacs-default-layout-name "Default"
    ;; If non nil the default layout name is displayed in the mode-line.
    ;; (default nil)
-   dotspacemacs-display-default-layout nil
+   dotspacemacs-display-default-layout t
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
    dotspacemacs-auto-resume-layouts nil
@@ -233,14 +248,22 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
    ))
 
 (defun dotspacemacs/user-init ()
-  "Initialization function for user code.
+  "Initialization function for user code.(setq-default cursor-type 'bar)
+
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
+
+;;--- set firefox as browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "oschrome")
+
+  (setq-default git-magit-status-fullscreen nil)
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -249,13 +272,35 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (spacemacs/toggle-highlight-current-line-globally-off)
   (spacemacs/toggle-highlight-indentation-on)
-  (setq puppet-indent-level 4)
+  (setq puppet-indent-level 2)
   (setq puppet-include-indent 4)
   (setq vc-follow-symlinks t)
   (setq tab-width 4)
-  (setq global-evil-search-highlight-persist nil)
+  (setq helm-buffer-max-length 40)
+  (setq dotspacemacs-helm-use-fuzzy 'source)
+  (setq evil-normal-state-cursor '("DarkSlateGray" (bar . 2)))
+  (setq mouse-yank-at-point t)
+  (setq x-select-enable-primary t)
+  (setq flycheck-shellcheck-follow-sources nil)
+
+
+  (setq magit-repository-directories '("~/git/"))
+  (setq helm-swoop-speed-or-color t)
 
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol t)
+ '(org-agenda-files (quote ("~/git/notes.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
