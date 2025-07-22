@@ -26,7 +26,7 @@ fi
 # it'll change your life man
 alias Grep=grep
 
-alias ldapsearch="ldapsearch -x -W"
+# alias ldapsearch="ldapsearch -x -W"
 
 export EDITOR="vi"
 
@@ -35,7 +35,7 @@ export EDITOR="vi"
 
 alias curlbrowser='curl -k -L -I -A '\''Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'\'''
 
-export PATH=$PATH:~/bin:/opt/puppetlabs/bin
+export PATH=$PATH:~/bin:~/packages:~/git/cwage/botutils
 
 export HISTSIZE=-1
 export HISTFILESIZE=-1
@@ -54,6 +54,33 @@ shopt -s histappend
 # After each command, append to the history file and reread it
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
-. ~/dotfiles/.bashrc.laptop
+# . ~/dotfiles/.bashrc.laptop
 
 alias ssh="cat ~/.ssh/config.d/* > ~/.ssh/config; ssh"
+
+certdate () {
+    echo | openssl s_client -servername $1 -connect $1:443 2> /dev/null | openssl x509 -noout -dates
+    }
+
+export TERM=xterm-256color
+
+alias e="emacsclient -t -a ''"
+alias eb="emacsbare"
+alias ec="emacsclient -c -n -a ''"
+alias emacsbare="emacs -nw -Q --eval \"(load-theme 'misterioso)\""
+alias vim="e"
+alias vi="e"
+alias emacs="e"
+alias vi=vim
+alias screen="echo you use tmux now idiot"
+alias xmms=xmms2
+alias chrome=brave-browser
+
+alias grep="rg"
+eval "$(~/.rbenv/bin/rbenv init - bash)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias gist="gh gist create -w"
