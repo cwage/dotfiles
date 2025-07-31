@@ -45,25 +45,13 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      auto-completion
      github-copilot
-     ;; better-defaults
-     ;; docker
      emacs-lisp
-     ;; git
      helm
-     ;; lsp
      multiple-cursors
-     ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
      perl5
      puppet
      ruby
      shell-scripts
-     ;; sql
      treemacs
      yaml)
 
@@ -99,8 +87,6 @@ This function should only modify configuration layer settings."
 This function is called at the very beginning of Spacemacs startup,
 before layer configuration.
 It should only modify the values of Spacemacs settings."
-
-  (setq evilified-state-evilify-map-warnings nil)
 
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
