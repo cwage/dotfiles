@@ -39,7 +39,6 @@ This function should only modify configuration layer settings."
      markdown
      go
      html
-     ;;javascript
 
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
@@ -52,7 +51,6 @@ This function should only modify configuration layer settings."
      ;; git
      helm
      ;; lsp
-     markdown
      multiple-cursors
      ;; org
      ;; (shell :variables
@@ -573,85 +571,6 @@ before packages are loaded."
 
   ;; Do not write anything past this comment. This is where Emacs will
   ;; auto-generate custom variable definitions.
-  (defun dotspacemacs/emacs-custom-settings ()
-    "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-    (custom-set-variables
-     ;; custom-set-variables was added by Custom.
-     ;; If you edit it by hand, you could mess it up, so be careful.
-     ;; Your init file should contain only one such instance.
-     ;; If there is more than one, they won't work right.
-     '(package-selected-packages
-       '(ac-ispell ace-jump-helm-line ace-link add-node-modules-path aggressive-indent
-                   aio anaconda-mode auto-compile auto-highlight-symbol
-                   auto-yasnippet blacken browse-at-remote bui bundler
-                   centered-cursor-mode chruby clang-format clean-aindent-mode
-                   color-identifiers-mode column-enforce-mode company
-                   company-anaconda company-emoji company-go company-lua
-                   company-plsense company-shell company-terraform company-web
-                   concurrent counsel counsel-css counsel-gtags
-                   csv-mode ctable cython-mode dactyl-mode dap-mode deferred
-                   define-word diminish dired-quick-sort disable-mouse docker
-                   docker-tramp dockerfile-mode dotenv-mode drag-stuff dumb-jump
-                   editorconfig elisp-def elisp-slime-nav emmet-mode
-                   emoji-cheat-sheet-plus emr enh-ruby-mode epc esh-help
-                   eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu evil-args
-                   evil-cleverparens evil-collection evil-commentary evil-easymotion
-                   evil-ediff evil-escape evil-exchange evil-goggles
-                   evil-iedit-state evil-indent-plus evil-lion evil-lisp-state
-                   evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-org
-                   evil-surround evil-textobj-line evil-tutor evil-unimpaired
-                   evil-visual-mark-mode evil-visualstar expand-region eyebrowse
-                   fancy-battery feature-mode fish-mode flx-ido flycheck-bashate
-                   flycheck-elsa flycheck-golangci-lint flycheck-package
-                   flycheck-pos-tip font-lock+ fuzzy ggtags gh-md gist
-                   git-gutter-fringe+ git-link git-messenger git-timemachine
-                   gitattributes-mode gitconfig-mode github-clone github-search
-                   gitignore-templates gnuplot go-eldoc go-fill-struct go-gen-test
-                   go-guru go-impl go-mode go-rename go-tag godoctor golden-ratio
-                   google-translate grip-mode grizzl haml-mode helm-ag
-                   helm-c-yasnippet helm-company helm-css-scss helm-descbinds
-                   helm-flx helm-git-grep helm-gitignore helm-gtags helm-ls-git
-                   helm-make helm-mode-manager helm-org helm-org-rifle
-                   helm-projectile helm-purpose helm-pydoc helm-swoop helm-themes
-                   helm-xref hierarchy highlight-indentation highlight-numbers
-                   highlight-parentheses hl-todo htmlize hungry-delete hybrid-mode
-                   impatient-mode import-js importmagic indent-guide inf-ruby
-                   insert-shebang inspector ivy js-doc js2-mode js2-refactor
-                   json-mode json-navigator json-reformat json-snatcher link-hint
-                   list-utils live-py-mode livid-mode load-env-vars load-relative
-                   loc-changes lorem-ipsum lsp-docker lsp-mode lsp-treemacs lua-mode
-                   macrostep markdown-mode markdown-toc minitest mmm-mode
-                   monokai-theme multi-line multi-term multiple-cursors mwim
-                   nameless nodejs-repl nose npm-mode open-junk-file org-cliplink
-                   org-contrib org-download org-mime org-pomodoro org-present
-                   org-projectile org-rich-yank org-superstar orgit-forge overseer
-                   ox-gfm package-lint paradox password-generator pip-requirements
-                   pipenv pippel poetry polymode popwin prettier-js projectile-rails
-                   pug-mode puppet-mode py-isort pyenv-mode pytest pythonic pyvenv
-                   quickrun rainbow-delimiters rainbow-identifiers rainbow-mode rake
-                   rbenv realgud request restart-emacs robe rspec-mode rubocop
-                   rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode
-                   ruby-tools rvm sass-mode scss-mode seeing-is-believing
-                   shell-maker shell-pop simple-httpd skewer-mode slim-mode smeargle
-                   solarized-theme spaceline-all-the-icons sphinx-doc sql-indent
-                   string-edit string-inflection swiper symbol-overlay symon tablist
-                   tagedit terminal-here tern test-simple toc-org transient
-                   treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp
-                   treemacs-projectile undo-tree unfill use-package uuidgen valign
-                   vi-tilde-fringe vimrc-mode vmd-mode volatile-highlights vterm
-                   web-beautify web-completion-data web-mode which-key winum
-                   writeroom-mode ws-butler xterm-color yaml yaml-mode yapfify
-                   yasnippet yasnippet-snippets zenburn-theme)))
-    (custom-set-faces
-     ;; custom-set-faces was added by Custom.
-     ;; If you edit it by hand, you could mess it up, so be careful.
-     ;; Your init file should contain only one such instance.
-     ;; If there is more than one, they won't work right.
-     )
-    )
   )
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
