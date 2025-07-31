@@ -1,0 +1,5 @@
+default xkb_types "local" {
+
+    include "complete"
+
+};
