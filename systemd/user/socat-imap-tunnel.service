@@ -1,0 +1,10 @@
+[Unit]
+Description=Socat tunnel for IMAP port 1143 to localhost:1143
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/socat TCP-LISTEN:1143,bind=10.10.15.120,reuseaddr,fork TCP:127.0.0.1:1143
+Restart=always
+
+[Install]
+WantedBy=default.target
