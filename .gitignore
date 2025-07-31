@@ -5,3 +5,8 @@
 .gnupg/pubring.kbx
 .gnupg/reader_0.status
 .gnupg/sshcontrol
+.ssh/*
+!.ssh/config.d/
+!.ssh/config.d/*
+.gnupg/*
+!.gnupg/gpg.conf
