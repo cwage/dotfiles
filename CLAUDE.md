@@ -80,8 +80,8 @@ This repository doesn't have automated installation scripts. Services should be:
 Check if services are running properly:
 ```bash
 # Test email tunnels
-netstat -tlnp | grep :1143  # IMAP tunnel
-netstat -tlnp | grep :1025  # SMTP tunnel
+ss -tlnp | grep :1143  # IMAP tunnel
+ss -tlnp | grep :1025  # SMTP tunnel
 
 # Test audio services
 systemctl --user status pipewire
