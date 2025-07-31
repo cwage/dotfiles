@@ -78,3 +78,6 @@ autocmd BufRead *yml* set list
 
 highlight Normal guibg=linen
 set runtimepath^=~/.vim/bundle/node
+
+set foldmarker=%%%FOLD,%%%END\ FOLD%%%
+set foldmethod=marker
