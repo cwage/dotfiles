@@ -1,6 +1,6 @@
 xsetroot -solid grey &
-xset m 1/8 2
-xinput set-prop 11 249 1 &
+#xset m 1/8 2
+#xinput set-prop 11 249 1 &
 nm-applet &
 xmms2d &
 xscreensaver &
@@ -13,14 +13,18 @@ xrdb ~/.Xresources
 #ssh-add
 emacs --daemon &
 volumeicon &
-shutter &
-redshift-gtk &
 #setxkbmap -option ctrl:swapcaps
 #if [ -d $HOME/.xkb/keymap ]; then
 #  setxkbmap -types local -print | \
 #    sed -e '/xkb_symbols/s/"[[:space:]]/+local&/' > $HOME/.xkb/keymap/custom
 #  xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/custom $DISPLAY
 #fi
-xrandr --output HDMI-0 --mode 1920x1080
-xrandr --output DVI-D-0 --off
+xrandr --output DP-0 --mode 1920x1080 --primary
+signal-desktop &
+#xrandr --output DVI-D-0 --off
+#xrandr --output DP-0 --mode 1920x1080
+PATH=$PATH:/home/cwage/bin
+#rivalcfg -s 500
+protonmail-bridge &
 exec awesome -c ~/.config/awesome/rc.lua
+#exec xterm
