@@ -39,7 +39,6 @@ This function should only modify configuration layer settings."
      markdown
      go
      html
-
      auto-completion
      github-copilot
      emacs-lisp
@@ -90,12 +89,6 @@ It should only modify the values of Spacemacs settings."
 
    ;; Custom theme configuration
    dotspacemacs-themes '(solarized-light)
-
-   ;; Custom font configuration
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 10.0
-                               :weight normal
-                               :width normal)
 
    ;; Custom major mode leader key for different environments
    dotspacemacs-major-mode-emacs-leader-key (if window-system "<M-return>" "C-M-m")
