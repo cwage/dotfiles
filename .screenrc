@@ -23,10 +23,10 @@ startup_message off
 hardstatus on
 hardstatus string "[%C%A] screen: %h (%t)"
 
-termcapinfo xterm ti@:te@
+#termcapinfo xterm ti@:te@
 defutf8 on
 
 maptimeout 0
 defc1 off
 
-defutf8 on
+#term screen-25color

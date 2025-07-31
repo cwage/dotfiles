@@ -1,0 +1,4 @@
+xkb_symbols "local" {
+key <ESC>  {[ quoteleft,    asciitilde      ]       };
+key <TLDE> {[ Escape     ]       };
+};

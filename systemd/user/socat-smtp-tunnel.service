@@ -1,0 +1,10 @@
+[Unit]
+Description=Socat tunnel for SMTP port 1025 to localhost:1025
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/socat TCP-LISTEN:1025,bind=10.10.15.120,reuseaddr,fork TCP:127.0.0.1:1025
+Restart=always
+
+[Install]
+WantedBy=default.target
