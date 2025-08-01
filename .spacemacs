@@ -48,6 +48,7 @@ This function should only modify configuration layer settings."
      puppet
      ruby
      shell-scripts
+     syntax-checking
      treemacs
      yaml)
 
@@ -186,34 +187,33 @@ This function is called at the very end of Spacemacs initialization."
                  helm-xref hierarchy highlight-indentation highlight-numbers
                  highlight-parentheses hl-todo htmlize hungry-delete hybrid-mode
                  impatient-mode import-js importmagic indent-guide inf-ruby
-                 insert-shebang inspector ivy journalctl-mode js-doc js2-mode
-                 js2-refactor json-mode json-navigator json-reformat json-snatcher
-                 link-hint list-utils live-py-mode livid-mode load-env-vars
-                 load-relative loc-changes lorem-ipsum lsp-docker lsp-mode
-                 lsp-treemacs lua-mode macrostep markdown-mode markdown-toc
-                 minitest mmm-mode monokai-theme multi-line multi-term
-                 multiple-cursors mwim nameless nodejs-repl nose npm-mode
-                 open-junk-file org-cliplink org-contrib org-download org-mime
-                 org-pomodoro org-present org-projectile org-rich-yank
-                 org-superstar orgit-forge overseer ox-gfm package-lint paradox
-                 password-generator pip-requirements pipenv pippel poetry polymode
-                 popwin prettier-js projectile-rails pug-mode puppet-mode py-isort
-                 pyenv-mode pytest pythonic pyvenv quickrun rainbow-delimiters
-                 rainbow-identifiers rainbow-mode rake rbenv realgud request
-                 restart-emacs robe rspec-mode rubocop rubocopfmt ruby-hash-syntax
-                 ruby-refactor ruby-test-mode ruby-tools rvm sass-mode scss-mode
+                 insert-shebang inspector ivy js-doc js2-mode js2-refactor
+                 json-mode json-navigator json-reformat json-snatcher link-hint
+                 list-utils live-py-mode livid-mode load-env-vars load-relative
+                 loc-changes lorem-ipsum lsp-docker lsp-mode lsp-treemacs lua-mode
+                 macrostep markdown-mode markdown-toc minitest mmm-mode
+                 monokai-theme multi-line multi-term multiple-cursors mwim
+                 nameless nodejs-repl nose npm-mode open-junk-file org-cliplink
+                 org-contrib org-download org-mime org-pomodoro org-present
+                 org-projectile org-rich-yank org-superstar orgit-forge overseer
+                 ox-gfm package-lint paradox password-generator pip-requirements
+                 pipenv pippel poetry polymode popwin pos-tip prettier-js
+                 projectile-rails pug-mode puppet-mode py-isort pyenv-mode pytest
+                 pythonic pyvenv quickrun rainbow-delimiters rainbow-identifiers
+                 rainbow-mode rake rbenv realgud request restart-emacs robe
+                 rspec-mode rubocop rubocopfmt ruby-hash-syntax ruby-refactor
+                 ruby-test-mode ruby-tools rvm sass-mode scss-mode
                  seeing-is-believing shell-maker shell-pop simple-httpd
                  skewer-mode slim-mode smeargle solarized-theme
                  spaceline-all-the-icons sphinx-doc sql-indent string-edit
-                 string-inflection swiper symbol-overlay symon systemd tablist
-                 tagedit terminal-here tern test-simple toc-org transient
-                 treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp
+                 string-inflection swiper symbol-overlay symon tablist tagedit
+                 terminal-here tern test-simple toc-org transient treemacs-evil
+                 treemacs-icons-dired treemacs-magit treemacs-persp
                  treemacs-projectile undo-tree unfill use-package uuidgen valign
                  vi-tilde-fringe vimrc-mode vmd-mode volatile-highlights vterm
                  web-beautify web-completion-data web-mode which-key winum
                  writeroom-mode ws-butler xterm-color yaml yaml-mode yapfify
-                 yasnippet yasnippet-snippets zenburn-theme))
-   '(warning-suppress-log-types '((copilot copilot-no-mode-indent))))
+                 yasnippet yasnippet-snippets zenburn-theme)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
