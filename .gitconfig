@@ -1,6 +1,8 @@
 [user]
 	email = cwage@quietlife.net
-	name = cwage
-	
-[remind]
-	paths = /home/cwage/git/cwage/*,/home/cwage/git/kindful/*
+	name = Chris Wage
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

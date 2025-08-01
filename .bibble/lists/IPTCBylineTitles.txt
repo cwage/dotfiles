@@ -1,9 +1,0 @@
-FRL -- AP photographs made by freelance photographers
-HO  -- Handout photographs
-MAG -- Photographs provided by magazines
-MBR -- Photographs picked up from members
-POOL-- Photographs made by pool photographers
-STF -- AP photos by staff photographers including Canadian Press
-STR -- AP photographs made by stringer photographers
-SUB -- Photographs picked up from foreign subscribers
-TEL -- Framegrabs from television
