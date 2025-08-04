@@ -1,7 +1,7 @@
 device_config:
   - is_loop: true
     ignore: true
-  - id_type: squashfs
+  - id_fs: squashfs
     ignore: true
   - is_systeminternal: true
     ignore: true
