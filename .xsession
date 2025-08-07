@@ -1,4 +1,5 @@
 xsetroot -solid grey &
+xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 10 -e btop &
 #xset m 1/8 2
 #xinput set-prop 11 249 1 &
 nm-applet &
@@ -16,7 +17,7 @@ volumeicon &
 #setxkbmap -option ctrl:swapcaps
 #if [ -d $HOME/.xkb/keymap ]; then
 #  setxkbmap -types local -print | \
-#    sed -e '/xkb_symbols/s/"[[:space:]]/+local&/' > $HOME/.xkb/keymap/custom
+    #    sed -e '/xkb_symbols/s/"[[:space:]]/+local&/' > $HOME/.xkb/keymap/custom
 #  xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/custom $DISPLAY
 #fi
 xrandr --output DP-0 --mode 1920x1080 --primary
