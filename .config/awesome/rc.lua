@@ -545,6 +545,10 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = false }
     },
 
+    -- Fix xterm maximization
+    { rule = { class = "XTerm" },
+      properties = { size_hints_honor = false }},
+
 --      { rule = { class = "Darktable" },
 --        properties = { titlebars_enabled = true } },
 }
