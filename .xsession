@@ -1,5 +1,5 @@
 xsetroot -solid grey &
-xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 10 -e btop &
+xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 6 -e btop &
 #xset m 1/8 2
 #xinput set-prop 11 249 1 &
 nm-applet &
