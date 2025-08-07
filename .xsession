@@ -27,5 +27,6 @@ PATH=$PATH:/home/cwage/bin
 #rivalcfg -s 500
 protonmail-bridge &
 udiskie --automount --notify --tray &
+opensnitch-ui &
 exec awesome -c ~/.config/awesome/rc.lua
 #exec xterm
