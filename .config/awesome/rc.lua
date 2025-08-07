@@ -329,6 +329,12 @@ awful.key({ modkey, "Shift"   }, "Tab",
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
+    awful.key({ modkey, "Shift" }, "r",
+      function ()
+        awful.spawn.with_shell("~/bin/somafm.sh -r")
+      end,
+      {description = "play random SomaFM stream", group = "media"}
+    ),
     awful.key({ modkey, "Shift" }, "d",
       function ()
         awful.spawn.with_shell("~/bin/somafm.sh defcon")
