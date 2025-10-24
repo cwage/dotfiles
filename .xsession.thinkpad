@@ -1,0 +1,43 @@
+unset SESSION_MANAGER
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+xsetroot -solid grey &
+#xfce4-power-manager &
+cbatticon &
+#xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 6 -e btop &
+nm-applet &
+xmms2d &
+# Switch to xsecurelock for locking (suspend + idle)
+# Ensure xss-lock knows our logind session ID so it can lock on suspend
+SESSION_ID=$(loginctl show-user "$USER" -p Display --value)
+xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- xsecurelock &
+# Idle locking after 10 minutes; use xsecurelock directly
+xautolock -detectsleep -locker xsecurelock -time 10 -corners 0+00 -cornerdelay 2 &
+xrdb ~/.Xresources
+dunst &
+
+# Ensure Volta-managed Node is on PATH for daemonized apps (e.g., Emacs Copilot)
+export PATH="$HOME/.volta/bin:$PATH"
+
+# Toolkit/UI scaling for HiDPI
+export GDK_SCALE=1
+export GDK_DPI_SCALE=1.25
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_SCALE_FACTOR=1.25
+emacs --daemon &
+volumeicon &
+setxkbmap -option ctrl:swapcaps
+if [ -d $HOME/.xkb/keymap ]; then
+  setxkbmap -types local -print | \
+        sed -e '/xkb_symbols/s/"[[:space:]]/+local&/' > $HOME/.xkb/keymap/custom
+  xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/custom $DISPLAY
+fi
+#xrandr --output DP-0 --mode 1920x1080 --primary
+signal-desktop &
+#xrandr --output DVI-D-0 --off
+#xrandr --output DP-0 --mode 1920x1080
+PATH=$PATH:$HOME/bin
+protonmail-bridge &
+udiskie --automount --notify --tray &
+#opensnitch-ui &
+exec awesome -c ~/.config/awesome/rc.lua
+#exec xterm
