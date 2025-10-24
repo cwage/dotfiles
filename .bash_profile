@@ -1,13 +1,3 @@
-# Remove the temp symlink from previous logins
-rm /tmp/ssh-agent-sock-screen
-
-# Link /tmp/ssh-agent-sock-screen to $SSH_AUTH_SOCK, which should be the
-# socket for an active, running ssh-agent
-#
-if [ $SSH_AUTH_SOCK ]; then
-    ln -s  $SSH_AUTH_SOCK /tmp/ssh-agent-sock-screen
-fi
-
 # Include .bashrc, if it exists
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
