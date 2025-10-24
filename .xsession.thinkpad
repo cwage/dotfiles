@@ -35,7 +35,7 @@ fi
 signal-desktop &
 #xrandr --output DVI-D-0 --off
 #xrandr --output DP-0 --mode 1920x1080
-PATH=$PATH:/home/cwage/bin
+PATH=$PATH:$HOME/bin
 protonmail-bridge &
 udiskie --automount --notify --tray &
 #opensnitch-ui &
