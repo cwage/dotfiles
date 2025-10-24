@@ -9,6 +9,8 @@ xmms2d &
 # Switch to xsecurelock for locking (suspend + idle)
 # Ensure xss-lock knows our logind session ID so it can lock on suspend
 SESSION_ID=$(loginctl show-user "$USER" -p Display --value)
+export XSECURELOCK_SHOW_USERNAME=0
+export XSECURELOCK_PASSWORD_PROMPT="Password:"
 xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- xsecurelock &
 # Idle locking after 10 minutes; use xsecurelock directly
 xautolock -detectsleep -locker xsecurelock -time 10 -corners 0+00 -cornerdelay 2 &
