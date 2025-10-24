@@ -4,6 +4,11 @@ if ls --color -d . >/dev/null 2>&1; then
 	alias ls='ls --color=auto'
 fi
 
+# Ensure Volta-managed Node is on PATH
+if [ -d "$HOME/.volta/bin" ] && ! printf '%s' "$PATH" | grep -q "$HOME/.volta/bin"; then
+  export PATH="$HOME/.volta/bin:$PATH"
+fi
+
 # Fancy prompt
 PS1='\u@\h:\w\$ '
 
@@ -36,23 +41,6 @@ export EDITOR="vi"
 alias curlbrowser='curl -k -L -I -A '\''Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'\'''
 
 export PATH=$PATH:~/bin:~/packages:~/git/cwage/ai/botutils:~/git/cwage/localai/
-
-export HISTSIZE=-1
-export HISTFILESIZE=-1
-
-export HISTTIMEFORMAT="%h %d %H:%M:%S> "
-
-export HISTIGNORE="&:ls:[bf]g:exit:pwd:clear:mount:umount:history:man*:cd*"
-
-
-
-# Avoid duplicates
-export HISTCONTROL=ignoreboth:erasedups
-# When the shell exits, append to the history file instead of overwriting it
-shopt -s histappend
-
-# After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # . ~/dotfiles/.bashrc.laptop
 
