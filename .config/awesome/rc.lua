@@ -303,7 +303,7 @@ awful.key({ modkey, "Shift"   }, "Tab",
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey,           }, "l",     function () awful.spawn("xsecurelock") end,
+    awful.key({ modkey,           }, "l",     function () awful.spawn("/home/cwage/bin/xscreensaver-lock") end,
               {description = "lock screen", group = "system"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
