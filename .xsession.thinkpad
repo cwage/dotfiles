@@ -23,7 +23,7 @@ SESSION_ID=$(loginctl show-user "$USER" -p Display --value)
 export XSECURELOCK_SHOW_USERNAME=0
 export XSECURELOCK_PASSWORD_PROMPT="Password:"
 xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- xsecurelock &
-# Idle locking after 10 minutes; use xsecurelock directly
+# Idle locking after 10 minutes; use ~/bin/xscreensaver-lock
 xautolock -detectsleep -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 xrdb ~/.Xresources
 dunst &
