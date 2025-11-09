@@ -1,3 +1,14 @@
+#!/bin/sh
+# Ensure OpenSSH ssh-agent wraps this X session (robust)
+if [ -z "${SSH_AUTH_SOCK:-}" ]; then
+  exec ssh-agent /bin/sh "$0" "$@"
+else
+  ssh-add -l >/dev/null 2>&1
+  rc=$?
+  if [ $rc -eq 2 ]; then
+    exec ssh-agent /bin/sh "$0" "$@"
+  fi
+fi
 unset SESSION_MANAGER
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 xsetroot -solid grey &
@@ -13,7 +24,7 @@ export XSECURELOCK_SHOW_USERNAME=0
 export XSECURELOCK_PASSWORD_PROMPT="Password:"
 xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- xsecurelock &
 # Idle locking after 10 minutes; use xsecurelock directly
-xautolock -detectsleep -locker xsecurelock -time 10 -corners 0+00 -cornerdelay 2 &
+xautolock -detectsleep -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 xrdb ~/.Xresources
 dunst &
 
