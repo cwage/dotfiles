@@ -64,7 +64,9 @@ editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod1"
 
 -- Machine-specific settings based on hostname
-local hostname = io.popen("hostname"):read("*l")
+local handle = io.popen("hostname")
+local hostname = handle:read("*l")
+handle:close()
 local wibar_height = 20
 local font_size = 6
 
@@ -72,6 +74,9 @@ if hostname == "portaptty" then
     wibar_height = 30
     font_size = 9
 end
+
+-- Set font early so widgets use the correct size
+beautiful.font = "DejaVu Sans " .. font_size
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -231,7 +236,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s, height=wibar_height, bg = "#eee8d5", fg = "#222222" })
+    s.mywibox = awful.wibar({ position = "bottom", screen = s, height = wibar_height, bg = "#eee8d5", fg = "#222222" })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -641,5 +646,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-beautiful.font = "DejaVu Sans " .. font_size
 beautiful.bg_systray = "#eee8d5"
