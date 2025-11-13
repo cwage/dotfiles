@@ -63,6 +63,21 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod1"
 
+-- Machine-specific settings based on hostname
+local handle = io.popen("hostname")
+local hostname = handle:read("*l")
+handle:close()
+local wibar_height = 20
+local font_size = 6
+
+if hostname == "portaptty" then
+    wibar_height = 30
+    font_size = 9
+end
+
+-- Set font early so widgets use the correct size
+beautiful.font = "DejaVu Sans " .. font_size
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
      awful.layout.suit.max,
@@ -108,7 +123,13 @@ else
                   menu_awesome,
                   { "Debian", debian.menu.Debian_menu.Debian },
                   menu_terminal,
-                }
+                },
+        theme = {
+            bg_normal = "#eee8d5",
+            bg_focus  = "#93a1a1",
+            fg_normal = "#222222",
+            fg_focus  = "#222222",
+        }
     })
 end
 
@@ -194,18 +215,28 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+        style   = {
+            bg_focus = "#93a1a1",
+            fg_focus = "#222222",
+        }
     }
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+        style   = {
+            bg_normal = "#eee8d5",
+            fg_normal = "#222222",
+            bg_focus  = "#eee8d5",
+            fg_focus  = "#222222",
+        }
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s, height=20 })
+    s.mywibox = awful.wibar({ position = "bottom", screen = s, height = wibar_height, bg = "#eee8d5", fg = "#222222" })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -615,4 +646,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-beautiful.font = "DejaVu Sans 6"
+beautiful.bg_systray = "#eee8d5"
