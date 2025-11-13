@@ -72,3 +72,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias gist="gh gist create -w"
+
+# Created by `pipx` on 2025-11-09 18:39:46
+export PATH="$PATH:/home/cwage/.local/bin"
