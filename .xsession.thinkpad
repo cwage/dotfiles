@@ -9,6 +9,10 @@ else
     exec ssh-agent /bin/sh "$0" "$@"
   fi
 fi
+
+# Start gpg-agent for GPG operations (SSH support disabled, using OpenSSH agent instead)
+gpgconf --launch gpg-agent
+
 unset SESSION_MANAGER
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 xsetroot -solid grey &
