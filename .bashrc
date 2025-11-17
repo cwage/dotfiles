@@ -64,7 +64,6 @@ alias screen="echo you use tmux now idiot"
 alias xmms=xmms2
 alias chrome=brave-browser
 
-alias grep="rg"
 eval "$(~/.rbenv/bin/rbenv init - bash)"
 
 export NVM_DIR="$HOME/.nvm"
