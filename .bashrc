@@ -9,6 +9,11 @@ if [ -d "$HOME/.volta/bin" ] && ! printf '%s' "$PATH" | grep -q "$HOME/.volta/bi
   export PATH="$HOME/.volta/bin:$PATH"
 fi
 
+# Ensure Flatpak user apps are on PATH
+if [ -d "$HOME/.local/share/flatpak/exports/bin" ] && ! printf '%s' "$PATH" | grep -q "$HOME/.local/share/flatpak/exports/bin"; then
+  export PATH="$HOME/.local/share/flatpak/exports/bin:$PATH"
+fi
+
 # Fancy prompt
 PS1='\u@\h:\w\$ '
 
@@ -63,6 +68,7 @@ alias vi=vim
 alias screen="echo you use tmux now idiot"
 alias xmms=xmms2
 alias chrome=brave-browser
+alias ncspot=io.github.hrkfdn.ncspot
 
 eval "$(~/.rbenv/bin/rbenv init - bash)"
 
