@@ -1,0 +1,123 @@
+# Mutt configuration for Proton Mail Bridge
+# Bridge provides IMAP on localhost:1143 and SMTP on localhost:1025
+
+# Personal information
+set realname = "Chris Wage"
+set from = "cwage@quietlife.net
+
+# IMAP configuration (Proton Mail Bridge)
+set imap_user = "cwage@quietlife.net"
+set imap_pass = "`pass show protonmail-imap`"
+set folder = "imap://127.0.0.1:1144"
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
+# SMTP configuration (Proton Mail Bridge)
+set smtp_url = "smtp://cwage@quietlife.net@127.0.0.1:1026"
+
+# SSL/TLS - Bridge uses STARTTLS on these ports
+set ssl_starttls = yes
+set ssl_force_tls = no
+
+# Cache for better performance
+set header_cache = "~/.cache/mutt/headers"
+set message_cachedir = "~/.cache/mutt/bodies"
+set certificate_file = "~/.cache/mutt/certificates"
+
+# Basic settings
+set mail_check = 120
+set timeout = 300
+set move = no
+set imap_keepalive = 300
+set sort = threads
+set sort_aux = reverse-last-date-received
+
+# Editor
+set editor = "vim"
+
+# Don't ask for confirmation when appending to mailboxes
+set confirmappend = no
+
+# Pager settings
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop = yes
+set menu_scroll = yes
+set tilde = yes
+
+# Compose settings
+set edit_headers = yes
+set fast_reply = yes
+set include = yes
+set forward_quote = yes
+
+# Display
+set date_format = "%Y-%m-%d %H:%M"
+set index_format = "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+
+# Solarized Light color scheme for mutt
+# Based on Ethan Schoonover's Solarized palette
+
+# Basic colors
+color normal        color241        color254        # base00 on base3
+color error         color160        color254        # red on base3
+color tilde         color240        color254        # base01 on base3
+color message       color37         color254        # cyan on base3
+color markers       color160        color254        # red on base3
+color attachment    color254        color241        # base3 on base00
+color search        color61         color254        # violet on base3
+color status        color241        color235        # base00 on base02 (inverted bar)
+color indicator     color254        color241        # base3 on base00 (highlighted)
+color tree          color136        color254        # yellow on base3
+
+# Index colors
+color index         color241        color254        "~A"            # all messages
+color index         color240        color254        "~R"            # read
+color index         color33         color254        "~N"            # new
+color index         color33         color254        "~O"            # old
+color index         color235        color254        "~F"            # flagged
+color index         color61         color254        "~Q"            # replied
+color index         color166        color254        "~="            # duplicate
+color index         color254        color160        "~D"            # deleted
+
+# Message headers
+color hdrdefault    color240        color254        # default headers
+color header        color33         color254        "^(From)"
+color header        color33         color254        "^(Subject)"
+color header        color33         color254        "^(Date)"
+color header        color37         color254        "^(To)"
+color header        color37         color254        "^(Cc)"
+
+# Body - quoted text
+color quoted        color33         color254        # blue
+color quoted1       color37         color254        # cyan
+color quoted2       color136        color254        # yellow
+color quoted3       color64         color254        # green
+color quoted4       color166        color254        # orange
+
+# Body - misc
+color signature     color240        color254
+color bold          color235        color254
+color underline     color235        color254
+
+# URLs and email addresses
+color body          color160        color254        "(https?|ftp)://[^ ]+"
+color body          color160        color254        "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}"
+
+# Sidebar colors (if using sidebar patch)
+color sidebar_divider    color240   color254
+color sidebar_new        color33    color254
+
+# Key bindings
+bind index G imap-fetch-mail
+bind pager j next-line
+bind pager k previous-line
+bind attach <return> view-mailcap
+bind attach l view-mailcap
+bind editor <space> noop
+bind index g first-entry
+bind pager g top
+bind pager G bottom
+bind index <space> collapse-thread
