@@ -61,3 +61,5 @@ Xcursor.size: 3
 
 XTerm*utf8: 1
 XTerm*locale: utf8
+
+XTerm*termName: xterm-256color
