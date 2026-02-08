@@ -78,5 +78,24 @@ export NVM_DIR="$HOME/.nvm"
 
 alias gist="gh gist create -w"
 
+# Youtube-dl aliases
+alias yta='docker run --rm \
+  -u $(id -u):$(id -g) \
+  -v "$PWD":/workdir \
+  -w /workdir \
+  jauderho/yt-dlp:latest \
+  -f bestaudio \
+  --extract-audio \
+  --audio-format mp3 \
+  --audio-quality 0'
+
+alias ytdl='docker run --rm -i \
+  -u $(id -u):$(id -g) \
+  -v "$PWD":/workdir \
+  -w /workdir \
+  jauderho/yt-dlp:latest'
+
+export COLORTERM=truecolor
+
 # Created by `pipx` on 2025-11-09 18:39:46
 export PATH="$PATH:/home/cwage/.local/bin"

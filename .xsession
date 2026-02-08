@@ -1,17 +1,11 @@
 xsetroot -solid grey &
 xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 6 -e btop &
-#xset m 1/8 2
-#xinput set-prop 11 249 1 &
 nm-applet &
 xmms2d &
 xscreensaver &
 xautolock -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 xrdb ~/.Xresources
-#xmodmap .Xmodmap
-#smbnetfs ~/smb &
-#diodon &
-#afuse -o mount_template="sshfs %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/ &
-#ssh-add
+# ssh-add
 emacs --daemon &
 volumeicon &
 #setxkbmap -option ctrl:swapcaps
@@ -22,12 +16,12 @@ volumeicon &
 #fi
 xrandr --output DP-0 --mode 1920x1080 --primary
 signal-desktop &
-#xrandr --output DVI-D-0 --off
-#xrandr --output DP-0 --mode 1920x1080
+slack &
 PATH=$PATH:/home/cwage/bin
-#rivalcfg -s 500
 protonmail-bridge &
+# Ensure a polkit authentication agent is available for udiskie actions
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 udiskie --automount --notify --tray &
-opensnitch-ui &
+#opensnitch-ui &
 exec awesome -c ~/.config/awesome/rc.lua
 #exec xterm

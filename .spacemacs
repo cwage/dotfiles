@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(systemd
+   '(toml
+     systemd
      python
      javascript
      lua
@@ -206,13 +207,13 @@ This function is called at the very end of Spacemacs initialization."
                  skewer-mode slim-mode smeargle solarized-theme
                  spaceline-all-the-icons sphinx-doc sql-indent string-edit
                  string-inflection swiper symbol-overlay symon systemd tablist
-                 tagedit terminal-here tern test-simple toc-org transient
-                 treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp
-                 treemacs-projectile undo-tree unfill use-package uuidgen valign
-                 vi-tilde-fringe vimrc-mode vmd-mode volatile-highlights vterm
-                 web-beautify web-completion-data web-mode which-key winum
-                 writeroom-mode ws-butler xterm-color yaml yaml-mode yapfify
-                 yasnippet yasnippet-snippets zenburn-theme))
+                 tagedit terminal-here tern test-simple toc-org toml-mode
+                 transient treemacs-evil treemacs-icons-dired treemacs-magit
+                 treemacs-persp treemacs-projectile undo-tree unfill use-package
+                 uuidgen valign vi-tilde-fringe vimrc-mode vmd-mode
+                 volatile-highlights vterm web-beautify web-completion-data
+                 web-mode which-key winum writeroom-mode ws-butler xterm-color
+                 yaml yaml-mode yapfify yasnippet yasnippet-snippets zenburn-theme))
    '(warning-suppress-log-types '((copilot copilot-no-mode-indent))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
