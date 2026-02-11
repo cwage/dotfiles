@@ -16,8 +16,7 @@ gpgconf --launch gpg-agent
 unset SESSION_MANAGER
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 xsetroot -solid grey &
-#xfce4-power-manager &
-cbatticon &
+xfce4-power-manager &
 #xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 6 -e btop &
 nm-applet &
 xmms2d &
