@@ -99,3 +99,6 @@ export COLORTERM=truecolor
 
 # Created by `pipx` on 2025-11-09 18:39:46
 export PATH="$PATH:/home/cwage/.local/bin"
+
+# necessary for mpd
+export MPD_HOST="$HOME/.config/mpd/socket"
