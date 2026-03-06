@@ -19,7 +19,7 @@ xsetroot -solid grey &
 xfce4-power-manager &
 #xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 6 -e btop &
 nm-applet &
-xmms2d &
+mpd &
 # Switch to xsecurelock for locking (suspend + idle)
 # Ensure xss-lock knows our logind session ID so it can lock on suspend
 SESSION_ID=$(loginctl show-user "$USER" -p Display --value)

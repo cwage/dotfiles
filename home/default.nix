@@ -62,4 +62,8 @@ in
 
   # Fonts
   home.file.".fonts".source = "${dotfilesPath}/.fonts";
+
+  # mpd (file only — mpd needs the directory writable for database/playlists)
+  home.file.".config/mpd/mpd.conf".source = "${dotfilesPath}/.config/mpd/mpd.conf";
+
 }
