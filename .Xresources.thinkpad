@@ -63,6 +63,7 @@ Xcursor.size: 24
 
 XTerm*utf8: 1
 XTerm*locale: utf8
+XTerm*backarrowKey: false
 
 ! URL-friendly word selection (matches Ubuntu default)
 *charClass: 33:48,35:48,37-38:48,43-47:48,58:48,61:48,63-64:48,95:48,126:48
