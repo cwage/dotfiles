@@ -15,10 +15,6 @@ in
   home.file.".gitconfig".source = "${dotfilesPath}/.gitconfig";
   home.file.".gitignore".source = "${dotfilesPath}/.gitignore";
 
-  # Vim
-  home.file.".vimrc".source = "${dotfilesPath}/.vimrc";
-  home.file.".vim".source = "${dotfilesPath}/.vim";
-
   # Tmux
   home.file.".tmux.conf".source = "${dotfilesPath}/.tmux.conf";
 
@@ -32,7 +28,6 @@ in
 
   # X11 - use thinkpad-specific files
   home.file.".Xresources".source = "${dotfilesPath}/.Xresources.thinkpad";
-  home.file.".Xmodmap".source = "${dotfilesPath}/.Xmodmap";
   home.file.".xsession" = {
     source = "${dotfilesPath}/.xsession.thinkpad";
     executable = true;
@@ -41,7 +36,6 @@ in
 
   # Terminal/colors
   home.file.".dir_colors".source = "${dotfilesPath}/.dir_colors";
-  home.file.".screenrc".source = "${dotfilesPath}/.screenrc";
 
   # XDG config dirs
   home.file.".config/awesome".source = "${dotfilesPath}/.config/awesome";
@@ -50,7 +44,6 @@ in
   home.file.".config/xfce4".source = "${dotfilesPath}/.config/xfce4";
 
   # GPG
-  home.file.".gnupg/options".source = "${dotfilesPath}/.gnupg/options";
   home.file.".gnupg/gpg-agent.conf".source = "${dotfilesPath}/.gnupg/gpg-agent.conf";
 
   # Mutt - note the different hierarchy mapping
