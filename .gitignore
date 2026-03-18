@@ -6,4 +6,5 @@
 !.ssh/config.d/
 !.ssh/config.d/*
 .gnupg/*
-!.gnupg/gpg.conf
+!.gnupg/gpg-agent.conf
+CLEANUP_AUDIT.md
