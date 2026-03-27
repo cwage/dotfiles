@@ -48,7 +48,7 @@ if [ -d $HOME/.xkb/keymap ]; then
   xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/custom $DISPLAY
 fi
 #xrandr --output DP-0 --mode 1920x1080 --primary
-signal-desktop &
+signal-desktop --password-store=gnome-libsecret &
 #xrandr --output DVI-D-0 --off
 #xrandr --output DP-0 --mode 1920x1080
 PATH=$PATH:$HOME/bin
