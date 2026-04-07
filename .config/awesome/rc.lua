@@ -566,6 +566,10 @@ awful.rules.rules = {
     { rule = { class = "XTerm" },
       properties = { size_hints_honor = false }},
 
+    -- Fix gqrx requesting a window larger than the screen
+    { rule = { class = "gqrx" },
+      properties = { size_hints_honor = false }},
+
 --      { rule = { class = "Darktable" },
 --        properties = { titlebars_enabled = true } },
 }
