@@ -134,6 +134,12 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+-- Create a battery widget (reads directly from sysfs, survives suspend)
+local battery_widget = awful.widget.watch(
+    "sh -c \"printf '%s %s%%' $(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)\"",
+    30
+)
+
 -- Create a textclock widget
 mytextclock = awful.widget.textclock("%a %b %d, %I:%M", 60)
 
@@ -240,6 +246,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+            battery_widget,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
