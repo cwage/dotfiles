@@ -89,3 +89,22 @@ export PATH="$PATH:/home/cwage/.local/bin"
 
 # necessary for mpd
 export MPD_HOST="$HOME/.config/mpd/socket"
+
+# Track comma (nix-run) usage to identify packages worth installing permanently
+, () {
+    local cmd="${1:-}"
+    if [ -n "$cmd" ]; then
+        mkdir -p ~/.local/state
+        echo "$(date -Is) $cmd" >> ~/.local/state/comma-usage.log
+    fi
+    command , "$@"
+}
+
+comma-report () {
+    if [ ! -f ~/.local/state/comma-usage.log ]; then
+        echo "No comma usage logged yet."
+        return
+    fi
+    echo "Comma usage (all time):"
+    awk '{print $2}' ~/.local/state/comma-usage.log | sort | uniq -c | sort -rn
+}
