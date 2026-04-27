@@ -136,7 +136,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a battery widget (reads directly from sysfs, survives suspend)
 local battery_widget = awful.widget.watch(
-    "sh -c \"printf '%s %s%%' $(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)\"",
+    [[sh -c 'status=$(cat /sys/class/power_supply/BAT0/status); cap=$(cat /sys/class/power_supply/BAT0/capacity); ac=$(cat /sys/class/power_supply/AC/online); [ "$status" = "Not charging" ] && [ "$ac" = "1" ] && status=Holding; printf "%s %s%%" "$status" "$cap"']],
     30
 )
 
