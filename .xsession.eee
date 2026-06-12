@@ -1,0 +1,44 @@
+#!/bin/sh
+# Pared-down X session for portajohn (ASUS Eee PC 1005HA, Debian i386).
+# Launched by LightDM through /usr/local/bin/eeepc-xsession (see the eeepc ansible repo),
+# which execs this file via /bin/sh. Deliberately minimal: no Electron apps, mail
+# bridges, or emacs daemon. This is a ~1 GB Atom N270 meant for terminal-first work
+# under AwesomeWM, so keep the autostart list short.
+
+# Ensure an OpenSSH ssh-agent wraps this session. Re-exec under a fresh agent if one
+# is not already present (rc 2 from ssh-add means "could not connect to an agent").
+if [ -z "${SSH_AUTH_SOCK:-}" ]; then
+  exec ssh-agent /bin/sh "$0" "$@"
+else
+  ssh-add -l >/dev/null 2>&1
+  if [ $? -eq 2 ]; then
+    exec ssh-agent /bin/sh "$0" "$@"
+  fi
+fi
+
+unset SESSION_MANAGER
+
+# Root window background and X resources.
+xsetroot -solid grey &
+xrdb "$HOME/.Xresources"
+
+# polkit agent so udiskie can authorize removable-media mounts.
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+# Minimal tray: network, volume, removable-media automount.
+nm-applet &
+volumeicon &
+udiskie --automount --notify --tray &
+
+# Screen locking via xsecurelock, mirroring the old Ansible-managed thinkpad setup:
+# xss-lock locks on suspend, xautolock locks on idle. Guarded so the session still
+# starts if these are not installed yet (e.g. the desktop tag has not been applied).
+if command -v xsecurelock >/dev/null 2>&1; then
+  export XSECURELOCK_SHOW_USERNAME=0
+  export XSECURELOCK_PASSWORD_PROMPT="Password:"
+  command -v xss-lock  >/dev/null 2>&1 && xss-lock --transfer-sleep-lock -- xsecurelock &
+  command -v xautolock >/dev/null 2>&1 && xautolock -detectsleep -time 10 -locker xsecurelock &
+fi
+
+# Hand off to the window manager.
+exec awesome -c "$HOME/.config/awesome/rc.lua"
