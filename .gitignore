@@ -8,3 +8,4 @@
 .gnupg/*
 !.gnupg/gpg-agent.conf
 CLEANUP_AUDIT.md
+.config/btop/*.log
