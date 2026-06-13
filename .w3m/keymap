@@ -1,0 +1,13 @@
+# w3m keymap -- vim-style bindings.
+# Managed in cwage/dotfiles; symlinked to ~/.w3m/keymap.
+#
+# w3m is already largely vim: hjkl cursor, g/G top/bottom, / ? n N search.
+# These lines fill the gaps. w3m has no half-page scroll, so no true C-d/C-u.
+#
+# NOTE: comments must be on their OWN line. A trailing "# ..." after a keymap
+# directive is parsed as the command's argument and silently breaks the binding
+# (e.g. NEXT_PAGE with a non-numeric arg scrolls zero pages -- looks like a no-op).
+
+keymap  C-f  NEXT_PAGE
+keymap  C-b  PREV_PAGE
+keymap  C-o  BACK
