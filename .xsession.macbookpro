@@ -41,6 +41,11 @@ export GDK_DPI_SCALE=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_SCALE_FACTOR=2
 
+# Electron/Chromium UI scale. X11 has no fractional GDK/Qt knob that
+# touches Chromium chrome — only --force-device-scale-factor moves it.
+# Wrappers in ~/bin (brave, signal-desktop, …) read this; unset = no flag.
+export ELECTRON_SCALE=1.5
+
 emacs --daemon &
 volumeicon &
 setxkbmap -option ctrl:swapcaps
