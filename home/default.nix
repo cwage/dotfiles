@@ -1,10 +1,11 @@
-# Home Manager module that symlinks dotfiles
-# NOTE: Currently hardcoded for thinkpad. For multi-host support,
-# refactor to use Home Manager options.
-{ config, lib, pkgs, ... }:
+# Home Manager module that symlinks dotfiles.
+# Per-host X11 variants (.Xresources.<host> / .xsession.<host>) are picked
+# from osConfig.networking.hostName.
+{ config, lib, pkgs, osConfig, ... }:
 
 let
   dotfilesPath = ./..;
+  hostName = osConfig.networking.hostName;
 in
 {
   # Shell
@@ -26,10 +27,10 @@ in
     fi
   '';
 
-  # X11 - use thinkpad-specific files
-  home.file.".Xresources".source = "${dotfilesPath}/.Xresources.thinkpad";
+  # X11 — per-host variants selected by hostname
+  home.file.".Xresources".source = "${dotfilesPath}/.Xresources.${hostName}";
   home.file.".xsession" = {
-    source = "${dotfilesPath}/.xsession.thinkpad";
+    source = "${dotfilesPath}/.xsession.${hostName}";
     executable = true;
   };
   home.file.".xkb".source = "${dotfilesPath}/.xkb";
@@ -58,5 +59,4 @@ in
 
   # mpd (file only — mpd needs the directory writable for database/playlists)
   home.file.".config/mpd/mpd.conf".source = "${dotfilesPath}/.config/mpd/mpd.conf";
-
 }

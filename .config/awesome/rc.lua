@@ -70,6 +70,10 @@ local font_size = 6
 if hostname == "portaptty" then
     wibar_height = 30
     font_size = 9
+elseif hostname == "macbookpro" then
+    -- 16" Retina at 3072x1920 (~226 DPI). 2x of thinkpad's 6/20.
+    wibar_height = 40
+    font_size = 12
 end
 
 -- Set font early so widgets use the correct size
