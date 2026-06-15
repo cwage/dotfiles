@@ -54,7 +54,9 @@ if [ -d $HOME/.xkb/keymap ]; then
         sed -e '/xkb_symbols/s/"[[:space:]]/+local&/' > $HOME/.xkb/keymap/custom
   xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/custom $DISPLAY
 fi
-signal-desktop --password-store=gnome-libsecret &
+# --password-store=gnome-libsecret lives in the ~/bin/signal-desktop wrapper
+# now (it has to travel with every invocation, not just this one).
+signal-desktop &
 # Prepend ~/bin so user wrappers (e.g. bin/brave with --force-device-scale-factor)
 # shadow the system profile binaries for awesome's run prompt.
 export PATH="$HOME/bin:$PATH"
