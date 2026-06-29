@@ -50,7 +50,12 @@ certdate () {
     echo | openssl s_client -servername $1 -connect $1:443 2> /dev/null | openssl x509 -noout -dates
     }
 
-export TERM=xterm-256color
+# Only upgrade a bare `xterm` to 256color, and never inside tmux — tmux sets its
+# own TERM (tmux-256color), and overriding it with xterm-256color makes apps emit
+# escape sequences tmux misinterprets, smearing redraws. Both are 256-color.
+if [ -z "$TMUX" ] && [ "$TERM" = "xterm" ]; then
+	export TERM=xterm-256color
+fi
 
 alias e="emacsclient -t -a ''"
 alias eb="emacsbare"
