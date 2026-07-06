@@ -88,6 +88,7 @@ alias ytdl='docker run --rm -i \
   jauderho/yt-dlp:latest'
 
 export COLORTERM=truecolor
+export GLAMOUR_STYLE=light
 
 # Created by `pipx` on 2025-11-09 18:39:46
 export PATH="$PATH:/home/cwage/.local/bin"
