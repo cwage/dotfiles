@@ -24,7 +24,10 @@ mpd &
 SESSION_ID=$(loginctl show-user "$USER" -p Display --value)
 export XSECURELOCK_SHOW_USERNAME=0
 export XSECURELOCK_PASSWORD_PROMPT="Password:"
-xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- xsecurelock &
+# Run the lock wrapper (ssh-agent purge + vault close) instead of bare
+# xsecurelock, so suspend-triggered locks get the same cleanup as Mod+l and
+# idle locks. The wrapper execs xsecurelock, preserving XSS_SLEEP_LOCK_FD.
+xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- "$HOME/bin/xscreensaver-lock" &
 # Idle locking after 10 minutes; use ~/bin/xscreensaver-lock
 xautolock -detectsleep -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
 xrdb ~/.Xresources
