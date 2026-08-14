@@ -57,6 +57,25 @@ if [ -z "$TMUX" ] && [ "$TERM" = "xterm" ]; then
 	export TERM=xterm-256color
 fi
 
+# The tmux server inherits its working directory from whichever client first
+# spawns it and holds that same directory handle for life — there is no way to
+# chdir a running server. Spawn it from inside a gocryptfs vault (~/bin/vault)
+# and the next force-close, which happens automatically on every suspend, leaves
+# the server pinned to a dead mount; from then on every pane it forks starts with
+# an unusable cwd ("getcwd: Transport endpoint is not connected"), and even
+# `new-session -c` can't override it. Pre-starting the server from $HOME means it
+# can never be anchored anywhere that gets unmounted; sessions still open in
+# whatever directory you ran tmux from. start-server is a no-op once a server is
+# running, and depends on `exit-empty off` in .tmux.conf — without that the
+# session-less server exits before it can claim the spot.
+tmux () {
+	case " $* " in
+		*" -L"*|*" -S"*|*" -V "*|*" -h "*) ;;
+		*) ( cd "$HOME" && command tmux start-server ) 2>/dev/null ;;
+	esac
+	command tmux "$@"
+}
+
 alias e="emacsclient -t -a ''"
 alias eb="emacsbare"
 alias ec="emacsclient -c -n -a ''"
