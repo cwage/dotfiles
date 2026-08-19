@@ -18,6 +18,7 @@ unset SESSION_MANAGER
 xsetroot -solid grey &
 #xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 6 -e btop &
 nm-applet &
+blueman-applet &
 mpd &
 # Switch to xsecurelock for locking (suspend + idle)
 # Ensure xss-lock knows our logind session ID so it can lock on suspend
