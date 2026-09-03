@@ -44,12 +44,10 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_SCALE_FACTOR=1.25
 emacs --daemon &
 volumeicon &
-setxkbmap -option ctrl:swapcaps
-if [ -d $HOME/.xkb/keymap ]; then
-  setxkbmap -types local -print | \
-        sed -e '/xkb_symbols/s/"[[:space:]]/+local&/' > $HOME/.xkb/keymap/custom
-  xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/custom $DISPLAY
-fi
+# Caps/Ctrl and Esc/grave remaps now happen at the kernel level via udev hwdb
+# (services.udev.extraHwdb in nix-workstation hosts/thinkpad/configuration.nix)
+# so GLFW/SDL games see them too. No XKB-layer remapping here or it would
+# re-swap on top of the kernel remap.
 #xrandr --output DP-0 --mode 1920x1080 --primary
 signal-desktop --password-store=gnome-libsecret &
 #xrandr --output DVI-D-0 --off
