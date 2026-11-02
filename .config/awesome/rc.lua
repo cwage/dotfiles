@@ -327,14 +327,14 @@ awful.key({ modkey, "Shift"   }, "Tab",
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
 
-    awful.key({ modkey, "Control" }, "Return", function () awful.util.spawn("/home/cwage/bin/startterms.sh") end),
+    awful.key({ modkey, "Control" }, "Return", function () awful.util.spawn(os.getenv("HOME") .. "/bin/startterms.sh") end),
 
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey,           }, "l",     function () awful.spawn("/home/cwage/bin/xscreensaver-lock") end,
+    awful.key({ modkey,           }, "l",     function () awful.spawn(os.getenv("HOME") .. "/.local/bin/xscreensaver-lock") end,
               {description = "lock screen", group = "system"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
@@ -535,6 +535,15 @@ awful.rules.rules = {
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
      }
+    },
+
+    -- OBS: drop modkey (Alt) mouse bindings so Alt+drag reaches OBS (crop in preview).
+    { rule = { class = "obs" },
+      properties = { buttons = gears.table.join(
+          awful.button({ }, 1, function (c)
+              c:emit_signal("request::activate", "mouse_click", {raise = true})
+          end))
+      }
     },
 
     -- Floating clients.

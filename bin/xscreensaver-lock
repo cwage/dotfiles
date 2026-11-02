@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# This is the script that is called via xautolock, i.e.:
+# xautolock -locker ~/.local/bin/xscreensaver-lock -time 10 -corners +000 -cornerdelay 2 &
+
+# Purge my passphrase from ssh-agent, if running
+ssh-add -D
+killall -9 gpg-agent scdaemon
+
+# Vaults stay mounted across screen locks; they are force-closed only on
+# suspend/hibernate, by the lock-vaults systemd unit in nix-workstation.
+
+#pactl set-sink-volume 0 0
+
+# exec so that when xss-lock invokes this script with --transfer-sleep-lock,
+# xsecurelock inherits XSS_SLEEP_LOCK_FD and suspend proceeds only once the
+# screen is actually locked.
+exec xsecurelock

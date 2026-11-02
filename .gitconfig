@@ -1,8 +1,9 @@
-[user]
-	email = cwage@quietlife.net
-	name = Chris Wage
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+# Identity (user.name/user.email) is per-account: home-manager links
+# .gitconfig.personal here for the personal profile; work accounts write it by hand.
+[include]
+	path = ~/.gitconfig.local

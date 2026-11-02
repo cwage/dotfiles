@@ -1,0 +1,5 @@
+# Personal-account session autostarts. Sourced (not executed) by .xsession;
+# home-manager links this only for the personal dotfiles profile.
+mpd &
+signal-desktop --password-store=gnome-libsecret &
+protonmail-bridge &

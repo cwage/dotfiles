@@ -19,18 +19,18 @@ xsetroot -solid grey &
 #xwinwrap -ni -b -un -ov -fs -- xterm -into WID -geometry 500x500+0+0 -fa 'Monospace' -fs 6 -e btop &
 nm-applet &
 blueman-applet &
-mpd &
 # Switch to xsecurelock for locking (suspend + idle)
 # Ensure xss-lock knows our logind session ID so it can lock on suspend
 SESSION_ID=$(loginctl show-user "$USER" -p Display --value)
 export XSECURELOCK_SHOW_USERNAME=0
 export XSECURELOCK_PASSWORD_PROMPT="Password:"
-# Run the lock wrapper (ssh-agent purge + vault close) instead of bare
-# xsecurelock, so suspend-triggered locks get the same cleanup as Mod+l and
-# idle locks. The wrapper execs xsecurelock, preserving XSS_SLEEP_LOCK_FD.
-xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- "$HOME/bin/xscreensaver-lock" &
-# Idle locking after 10 minutes; use ~/bin/xscreensaver-lock
-xautolock -detectsleep -locker ~/bin/xscreensaver-lock -time 10 -corners 0+00 -cornerdelay 2 &
+# Run the lock wrapper (ssh-agent purge) instead of bare xsecurelock, so
+# suspend-triggered locks get the same cleanup as Mod+l and idle locks. The
+# wrapper execs xsecurelock, preserving XSS_SLEEP_LOCK_FD. It lives in this
+# repo (bin/) and is linked by home-manager, so every account gets it.
+xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- "$HOME/.local/bin/xscreensaver-lock" &
+# Idle locking after 10 minutes
+xautolock -detectsleep -locker "$HOME/.local/bin/xscreensaver-lock" -time 10 -corners 0+00 -cornerdelay 2 &
 xrdb ~/.Xresources
 dunst &
 
@@ -49,11 +49,12 @@ volumeicon &
 # so GLFW/SDL games see them too. No XKB-layer remapping here or it would
 # re-swap on top of the kernel remap.
 #xrandr --output DP-0 --mode 1920x1080 --primary
-signal-desktop --password-store=gnome-libsecret &
 #xrandr --output DVI-D-0 --off
 #xrandr --output DP-0 --mode 1920x1080
 PATH=$PATH:$HOME/bin
-protonmail-bridge &
+# Personal-account autostarts (mpd, signal, protonmail-bridge). home-manager
+# only links this for the personal dotfiles profile.
+[ -f "$HOME/.xsession.personal" ] && . "$HOME/.xsession.personal"
 udiskie --automount --notify --tray &
 #opensnitch-ui &
 exec awesome -c ~/.config/awesome/rc.lua

@@ -44,8 +44,6 @@ export PATH=~/bin:$PATH:~/packages:~/git/cwage/ai/botutils
 
 # . ~/dotfiles/.bashrc.laptop
 
-alias ssh="cat ~/.ssh/config.d/* > ~/.ssh/config; ssh"
-
 certdate () {
     echo | openssl s_client -servername $1 -connect $1:443 2> /dev/null | openssl x509 -noout -dates
     }
@@ -185,7 +183,7 @@ export COLORTERM=truecolor
 export GLAMOUR_STYLE=light
 
 # Created by `pipx` on 2025-11-09 18:39:46
-export PATH="$PATH:/home/cwage/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # necessary for mpd
 export MPD_HOST="$HOME/.config/mpd/socket"

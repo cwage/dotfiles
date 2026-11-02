@@ -9,4 +9,4 @@ fi
 
 
 # Created by `pipx` on 2025-11-09 18:39:46
-export PATH="$PATH:/home/cwage/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
