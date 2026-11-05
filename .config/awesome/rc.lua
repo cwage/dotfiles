@@ -409,6 +409,32 @@ awful.key({ modkey, "Shift"   }, "Tab",
 
 )
 
+-- Touch Bar / media keys (macbookpro only). The Touch Bar sends ordinary
+-- XF86 key events; with no desktop environment nothing acts on them, so bind
+-- them here. gmux_backlight is named explicitly because the Touch Bar's own
+-- backlight is also a backlight device and brightnessctl may pick it instead.
+if hostname == "macbookpro" then
+    local function sh(cmd)
+        return function() awful.spawn.with_shell(cmd) end
+    end
+    globalkeys = gears.table.join(globalkeys,
+        awful.key({}, "XF86MonBrightnessUp",   sh("brightnessctl -q -d gmux_backlight set 5%+"),
+                  {description = "screen brightness up", group = "media"}),
+        awful.key({}, "XF86MonBrightnessDown", sh("brightnessctl -q -d gmux_backlight set 5%-"),
+                  {description = "screen brightness down", group = "media"}),
+        awful.key({}, "XF86KbdBrightnessUp",   sh("brightnessctl -q -d :white:kbd_backlight set 10%+"),
+                  {description = "keyboard backlight up", group = "media"}),
+        awful.key({}, "XF86KbdBrightnessDown", sh("brightnessctl -q -d :white:kbd_backlight set 10%-"),
+                  {description = "keyboard backlight down", group = "media"}),
+        awful.key({}, "XF86AudioRaiseVolume",  sh("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"),
+                  {description = "volume up", group = "media"}),
+        awful.key({}, "XF86AudioLowerVolume",  sh("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+                  {description = "volume down", group = "media"}),
+        awful.key({}, "XF86AudioMute",         sh("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
+                  {description = "mute", group = "media"})
+    )
+end
+
 clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
         function (c)
