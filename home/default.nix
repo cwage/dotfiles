@@ -50,6 +50,18 @@ in
       };
       home.file.".xkb".source = "${dotfilesPath}/.xkb";
 
+      # Pointer cursor theme (macbookpro only for now). With no theme installed
+      # where libXcursor looks, X falls back to its built-in bitmap cursors, which
+      # are a fixed ~16px and ignore Xcursor.size — unusable on the Retina panel.
+      # This links Adwaita into ~/.icons and makes it the default theme. The X11
+      # backend (x11.enable) is left off because it would generate ~/.Xresources,
+      # which is managed above; Xcursor.theme/size live in .Xresources.<host>.
+      home.pointerCursor = lib.mkIf (hostName == "macbookpro") {
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
+        size = 48;
+      };
+
       # Screen lock wrapper used by .xsession (xss-lock/xautolock) and awesome
       home.file.".local/bin/xscreensaver-lock" = {
         source = "${dotfilesPath}/bin/xscreensaver-lock";

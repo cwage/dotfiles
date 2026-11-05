@@ -60,8 +60,10 @@ Xft.dpi: 192
 XTerm*faceName: Source Code Pro,Source Code Pro Semibold
 XTerm*faceSize: 12
 
-! Cursor needs an explicit size — it doesn't follow Xft.dpi.
-Xcursor.size: 32
+! Cursor needs an explicit theme and size — it doesn't follow Xft.dpi. The
+! theme itself is installed by home.pointerCursor in home/default.nix.
+Xcursor.theme: Adwaita
+Xcursor.size: 48
 
 XTerm*utf8: 1
 XTerm*locale: utf8
