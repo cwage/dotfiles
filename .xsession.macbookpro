@@ -52,12 +52,10 @@ export ELECTRON_SCALE=1.5
 
 emacs --daemon &
 volumeicon &
-setxkbmap -option ctrl:swapcaps
-if [ -d $HOME/.xkb/keymap ]; then
-  setxkbmap -types local -print | \
-        sed -e '/xkb_symbols/s/"[[:space:]]/+local&/' > $HOME/.xkb/keymap/custom
-  xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/custom $DISPLAY
-fi
+# Caps/Ctrl and Esc/grave remaps happen at the kernel level via udev hwdb
+# (services.udev.extraHwdb in nix-workstation hosts/macbookpro/configuration.nix)
+# so they survive the keyboard re-enumerating on resume. No XKB-layer
+# remapping here or it would re-swap on top of the kernel remap.
 # --password-store=gnome-libsecret lives in the ~/bin/signal-desktop wrapper
 # now (it has to travel with every invocation, not just this one).
 signal-desktop &
