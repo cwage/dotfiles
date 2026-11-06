@@ -12,7 +12,25 @@ killall -9 gpg-agent scdaemon
 
 #pactl set-sink-volume 0 0
 
-# exec so that when xss-lock invokes this script with --transfer-sleep-lock,
-# xsecurelock inherits XSS_SLEEP_LOCK_FD and suspend proceeds only once the
-# screen is actually locked.
-exec xsecurelock
+xsecurelock &
+locker=$!
+
+# xss-lock --transfer-sleep-lock: suspend proceeds once every copy of this fd is
+# closed. xsecurelock closes its copy when the screen is locked, so drop ours or
+# this script would hold up suspend for as long as the screen stays locked.
+[ -n "${XSS_SLEEP_LOCK_FD:-}" ] && eval "exec ${XSS_SLEEP_LOCK_FD}>&-"
+
+# xss-lock unlocks by signalling this process, so pass that on to xsecurelock.
+trap 'kill "$locker" 2>/dev/null' HUP INT TERM
+
+# xsecurelock exits 0 only on a real unlock. Anything else (e.g. it couldn't get
+# the grab because the screen is already locked) must not put up a prompt.
+wait "$locker" || exit
+
+# Re-add the key purged above. This has to be a terminal rather than ssh-askpass:
+# askpass grabs the keyboard, and a prompt left open when the idle timer fires
+# would stop xsecurelock from getting its grab, leaving the screen unlocked.
+# flock keeps ignored prompts from piling up across repeated locks; backgrounded
+# so that xss-lock and xautolock see the lock as finished.
+flock -n "${XDG_RUNTIME_DIR:-$HOME}/.ssh-add-prompt.lock" \
+    xterm -T ssh-add -e ssh-add &
