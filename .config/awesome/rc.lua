@@ -79,6 +79,78 @@ end
 -- Set font early so widgets use the correct size
 beautiful.font = "DejaVu Sans " .. font_size
 
+-- {{{ Tag contexts
+-- A context is a full set of tags 1-9. Mod+N, the tag list and next/prev all
+-- act on the current context only, and a key flips between contexts, so
+-- "Mod+2" can be the personal browser in one and the work browser in the
+-- other. Hosts with a single context behave exactly as before.
+local contexts = { "main" }
+if hostname == "macbookpro" then
+    contexts = { "personal", "work" }
+end
+local tags_per_context = 9
+local current_context = 1
+local context_widget = wibox.widget.textbox()
+
+local function update_context_widget()
+    if #contexts > 1 then
+        context_widget.markup = " <b>" .. contexts[current_context] .. "</b> "
+    end
+end
+update_context_widget()
+
+-- Tag i (1-9) of the current context on screen s.
+local function context_tag(s, i)
+    return s.tags[(current_context - 1) * tags_per_context + i]
+end
+
+-- Position (1-9) of tag t within its own context.
+local function context_index(t)
+    return (t.index - 1) % tags_per_context + 1
+end
+
+local function tag_in_current_context(t)
+    return math.floor((t.index - 1) / tags_per_context) + 1 == current_context
+end
+
+-- Flip to the next context, returning each screen to the tag it was last on
+-- in that context.
+local function next_context()
+    for s in screen do
+        s.context_last = s.context_last or {}
+        if s.selected_tag then
+            s.context_last[current_context] = context_index(s.selected_tag)
+        end
+    end
+    current_context = current_context % #contexts + 1
+    for s in screen do
+        local t = context_tag(s, (s.context_last or {})[current_context] or 1)
+        if t then t:view_only() end
+    end
+    update_context_widget()
+end
+
+-- Next/previous tag, wrapping within the current context.
+local function view_context_relative(offset)
+    local s = awful.screen.focused()
+    local cur = s.selected_tag and context_index(s.selected_tag) or 1
+    local t = context_tag(s, (cur - 1 + offset) % tags_per_context + 1)
+    if t then t:view_only() end
+end
+
+-- Send the focused window to the next context, onto the tag that context was
+-- last showing. The view stays where it is.
+local function move_client_to_next_context()
+    local c = client.focus
+    if not c or #contexts < 2 then return end
+    local s = c.screen
+    local target = current_context % #contexts + 1
+    local i = (s.context_last or {})[target] or 1
+    local t = s.tags[(target - 1) * tags_per_context + i]
+    if t then c:move_to_tag(t) end
+end
+-- }}}
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
      awful.layout.suit.max,
@@ -161,8 +233,8 @@ local taglist_buttons = gears.table.join(
                                                   client.focus:toggle_tag(t)
                                               end
                                           end),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+                    awful.button({ }, 4, function() view_context_relative(1) end),
+                    awful.button({ }, 5, function() view_context_relative(-1) end)
                 )
 
 local tasklist_buttons = gears.table.join(
@@ -198,7 +270,16 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    -- One set of tags 1-9 per context (see "Tag contexts" above).
+    for c = 1, #contexts do
+        for i = 1, tags_per_context do
+            awful.tag.add(tostring(i), {
+                screen   = s,
+                layout   = awful.layout.layouts[1],
+                selected = (c == current_context and i == 1),
+            })
+        end
+    end
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -213,7 +294,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.all,
+        filter  = tag_in_current_context,
         buttons = taglist_buttons,
         style   = {
             bg_focus = "#93a1a1",
@@ -243,6 +324,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
+            context_widget,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -262,8 +344,8 @@ end)
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 4, function() view_context_relative(1) end),
+    awful.button({ }, 5, function() view_context_relative(-1) end)
 ))
 -- }}}
 
@@ -271,12 +353,18 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+    awful.key({ modkey,           }, "Left",   function () view_context_relative(-1) end,
               {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+    awful.key({ modkey,           }, "Right",  function () view_context_relative(1) end,
               {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+    -- With several contexts this key flips between them; otherwise it keeps
+    -- the stock "previous tag" behaviour. (With the Esc/grave hwdb swap,
+    -- Escape is the physical key above Tab.)
+    awful.key({ modkey,           }, "Escape",
+              #contexts > 1 and next_context or awful.tag.history.restore,
+              {description = "switch context / go back", group = "tag"}),
+    awful.key({ modkey, "Shift"   }, "Escape", move_client_to_next_context,
+              {description = "send window to the other context", group = "tag"}),
 
     awful.key({ modkey,           }, "j",
         function ()
@@ -488,7 +576,7 @@ for i = 1, 9 do
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
                         local screen = awful.screen.focused()
-                        local tag = screen.tags[i]
+                        local tag = context_tag(screen, i)
                         if tag then
                            tag:view_only()
                         end
@@ -498,7 +586,7 @@ for i = 1, 9 do
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
                       local screen = awful.screen.focused()
-                      local tag = screen.tags[i]
+                      local tag = context_tag(screen, i)
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
@@ -508,7 +596,7 @@ for i = 1, 9 do
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
-                          local tag = client.focus.screen.tags[i]
+                          local tag = context_tag(client.focus.screen, i)
                           if tag then
                               client.focus:move_to_tag(tag)
                           end
@@ -519,7 +607,7 @@ for i = 1, 9 do
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
-                          local tag = client.focus.screen.tags[i]
+                          local tag = context_tag(client.focus.screen, i)
                           if tag then
                               client.focus:toggle_tag(tag)
                           end
