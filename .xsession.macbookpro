@@ -52,6 +52,7 @@ export ELECTRON_SCALE=1.5
 
 emacs --daemon &
 volumeicon &
+blueman-applet &
 # Caps/Ctrl and Esc/grave remaps happen at the kernel level via udev hwdb
 # (services.udev.extraHwdb in nix-workstation hosts/macbookpro/configuration.nix)
 # so they survive the keyboard re-enumerating on resume. No XKB-layer
