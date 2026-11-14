@@ -36,9 +36,33 @@ in
 
       # Emacs/Spacemacs
       home.file.".spacemacs".source = "${dotfilesPath}/.spacemacs";
+      # Bootstrap spacemacs on a fresh account — best-effort by design.
+      #
+      # home-manager-<user>.service is WantedBy=multi-user.target and ordered
+      # only After=nix-daemon.socket, so at boot it runs long before the
+      # network is up; the activation script runs under `set -eu -o pipefail`,
+      # so a failed clone fails the *entire* activation and leaves the system
+      # "degraded". That is exactly what happened on darterpro's first boot:
+      # "fatal: unable to access ... Could not resolve host: github.com" —
+      # after all the file links had already been made. So never let this step
+      # return non-zero.
+      #
+      # The guard also has to tolerate a non-empty ~/.emacs.d that isn't a
+      # checkout: emacs creates ~/.emacs.d/eln-cache on first run, and
+      # `git clone` into a non-empty directory fails, which would otherwise
+      # wedge this step permanently once a vanilla emacs has started.
       home.activation.spacemacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        if [ ! -d "$HOME/.emacs.d/.git" ]; then
-          run ${pkgs.git}/bin/git clone --branch develop https://github.com/syl20bnr/spacemacs.git "$HOME/.emacs.d"
+        spacemacsRepo=https://github.com/syl20bnr/spacemacs.git
+        if [ ! -e "$HOME/.emacs.d/.git" ]; then
+          if [ -n "$(${pkgs.coreutils}/bin/ls -A "$HOME/.emacs.d" 2>/dev/null)" ]; then
+            warnEcho "~/.emacs.d exists but is not a git checkout; leaving it alone." \
+                     "To bootstrap spacemacs: move it aside, then" \
+                     "git clone --branch develop $spacemacsRepo ~/.emacs.d"
+          else
+            run ${pkgs.git}/bin/git clone --branch develop "$spacemacsRepo" "$HOME/.emacs.d" \
+              || warnEcho "spacemacs clone failed (no network yet this early in boot?);" \
+                          "retry with: git clone --branch develop $spacemacsRepo ~/.emacs.d"
+          fi
         fi
       '';
 

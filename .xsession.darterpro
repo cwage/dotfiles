@@ -1,0 +1,63 @@
+#!/bin/sh
+# Ensure OpenSSH ssh-agent wraps this X session (robust)
+if [ -z "${SSH_AUTH_SOCK:-}" ]; then
+  exec ssh-agent /bin/sh "$0" "$@"
+else
+  ssh-add -l >/dev/null 2>&1
+  rc=$?
+  if [ $rc -eq 2 ]; then
+    exec ssh-agent /bin/sh "$0" "$@"
+  fi
+fi
+
+# Start gpg-agent for GPG operations (SSH support disabled, using OpenSSH agent instead)
+gpgconf --launch gpg-agent
+
+unset SESSION_MANAGER
+/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1 &
+xsetroot -solid grey &
+nm-applet &
+blueman-applet &
+# Switch to xsecurelock for locking (suspend + idle)
+# Ensure xss-lock knows our logind session ID so it can lock on suspend
+SESSION_ID=$(loginctl show-user "$USER" -p Display --value)
+export XSECURELOCK_SHOW_USERNAME=0
+export XSECURELOCK_PASSWORD_PROMPT="Password:"
+# Run the lock wrapper (ssh-agent purge) instead of bare xsecurelock, so
+# suspend-triggered locks get the same cleanup as Mod+l and idle locks. The
+# wrapper execs xsecurelock, preserving XSS_SLEEP_LOCK_FD. It lives in this
+# repo (bin/) and is linked by home-manager, so every account gets it.
+xss-lock --transfer-sleep-lock --session "$SESSION_ID" -- "$HOME/.local/bin/xscreensaver-lock" &
+# Idle locking after 10 minutes
+xautolock -detectsleep -locker "$HOME/.local/bin/xscreensaver-lock" -time 10 -corners 0+00 -cornerdelay 2 &
+xrdb ~/.Xresources
+dunst &
+
+# Ensure Volta-managed Node is on PATH for daemonized apps (e.g., Emacs Copilot)
+export PATH="$HOME/.volta/bin:$PATH"
+
+# Prepend ~/bin so user wrappers (brave, signal-desktop, …) shadow the system
+# profile binaries — must happen BEFORE any background launches below, or
+# things like `signal-desktop &` race past the wrapper.
+export PATH="$HOME/bin:$PATH"
+
+# Toolkit/UI scaling for HiDPI. The panel is 1920x1200 at 16", ~141 DPI —
+# effectively identical to the thinkpad's 15.6" 1080p, so the same values
+# apply: Xft.dpi=144 (in .Xresources.darterpro) plus these for GTK/Qt apps
+# that don't read Xft.dpi. ELECTRON_SCALE is deliberately unset, which makes
+# the ~/bin Chromium/Electron wrappers pass no --force-device-scale-factor.
+export GDK_SCALE=1
+export GDK_DPI_SCALE=1.25
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_SCALE_FACTOR=1.25
+emacs --daemon &
+volumeicon &
+# Caps/Ctrl and Esc/grave remaps happen at the kernel level via udev hwdb
+# (services.udev.extraHwdb in nix-workstation hosts/darterpro/configuration.nix)
+# so GLFW/SDL games see them too and they survive resume. No XKB-layer
+# remapping here or it would re-swap on top of the kernel remap.
+mpd &
+signal-desktop &
+protonmail-bridge &
+udiskie --automount --notify --tray &
+exec awesome -c ~/.config/awesome/rc.lua

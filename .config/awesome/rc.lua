@@ -85,7 +85,7 @@ beautiful.font = "DejaVu Sans " .. font_size
 -- "Mod+2" can be the personal browser in one and the work browser in the
 -- other. Hosts with a single context behave exactly as before.
 local contexts = { "main" }
-if hostname == "macbookpro" then
+if hostname == "macbookpro" or hostname == "darterpro" then
     contexts = { "personal", "work" }
 end
 local tags_per_context = 9
@@ -497,14 +497,16 @@ awful.key({ modkey, "Shift"   }, "Tab",
 
 )
 
--- Touch Bar / media keys (macbookpro only). The Touch Bar sends ordinary
--- XF86 key events; with no desktop environment nothing acts on them, so bind
--- them here. gmux_backlight is named explicitly because the Touch Bar's own
+-- Media / brightness keys. The hardware sends ordinary XF86 key events; with
+-- no desktop environment nothing acts on them, so bind them here.
+-- brightnessctl needs no root: it goes through the systemd-logind API.
+local function sh(cmd)
+    return function() awful.spawn.with_shell(cmd) end
+end
+
+-- macbookpro: gmux_backlight is named explicitly because the Touch Bar's own
 -- backlight is also a backlight device and brightnessctl may pick it instead.
 if hostname == "macbookpro" then
-    local function sh(cmd)
-        return function() awful.spawn.with_shell(cmd) end
-    end
     globalkeys = gears.table.join(globalkeys,
         awful.key({}, "XF86MonBrightnessUp",   sh("brightnessctl -q -d gmux_backlight set 5%+"),
                   {description = "screen brightness up", group = "media"}),
@@ -520,6 +522,27 @@ if hostname == "macbookpro" then
                   {description = "volume down", group = "media"}),
         awful.key({}, "XF86AudioMute",         sh("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
                   {description = "mute", group = "media"})
+    )
+end
+
+-- darterpro: the only backlight device is acpi_video0 (System76 Open
+-- Firmware exposes no intel_backlight node), so brightnessctl's default
+-- device pick is the right one -- no -d needed. The keyboard backlight is
+-- handled in firmware by Fn+the kbd-backlight key.
+if hostname == "darterpro" then
+    globalkeys = gears.table.join(globalkeys,
+        awful.key({}, "XF86MonBrightnessUp",   sh("brightnessctl -q set 5%+"),
+                  {description = "screen brightness up", group = "media"}),
+        awful.key({}, "XF86MonBrightnessDown", sh("brightnessctl -q set 5%-"),
+                  {description = "screen brightness down", group = "media"}),
+        awful.key({}, "XF86AudioRaiseVolume",  sh("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"),
+                  {description = "volume up", group = "media"}),
+        awful.key({}, "XF86AudioLowerVolume",  sh("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+                  {description = "volume down", group = "media"}),
+        awful.key({}, "XF86AudioMute",         sh("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
+                  {description = "mute", group = "media"}),
+        awful.key({}, "XF86AudioMicMute",      sh("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
+                  {description = "mic mute", group = "media"})
     )
 end
 
