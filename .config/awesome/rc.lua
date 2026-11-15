@@ -797,3 +797,17 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 beautiful.bg_systray = "#eee8d5"
+
+-- {{{ Tray clients that must start AFTER the systray exists
+-- volumeicon is a GTK StatusIcon client and gives up if no system tray owns
+-- the _NET_SYSTEM_TRAY selection when it starts. .xsession launches its
+-- autostarts before `exec awesome`, so at that point there is no tray yet and
+-- volumeicon silently exits -- it was never running on any host, with nothing
+-- in ~/.xsession-errors to say why. Starting it from here instead means the
+-- wibar (and its systray widget) already exist.
+--
+-- The pgrep guard keeps this idempotent: it avoids a second instance both on
+-- an awesome restart (Mod+Ctrl+r) and on hosts whose .xsession still launches
+-- volumeicon itself -- so those hosts get fixed too without editing them.
+awful.spawn.with_shell("pgrep -x volumeicon >/dev/null || volumeicon")
+-- }}}

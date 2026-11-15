@@ -51,12 +51,12 @@ export GDK_DPI_SCALE=1.25
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_SCALE_FACTOR=1.25
 emacs --daemon &
-volumeicon &
+# volumeicon now starts from rc.lua, after awesome's systray exists
 # Caps/Ctrl and Esc/grave remaps happen at the kernel level via udev hwdb
 # (services.udev.extraHwdb in nix-workstation hosts/darterpro/configuration.nix)
 # so GLFW/SDL games see them too and they survive resume. No XKB-layer
 # remapping here or it would re-swap on top of the kernel remap.
-mpd &
+# mpd not started: the "work" dotfiles profile does not link mpd.conf
 signal-desktop &
 protonmail-bridge &
 udiskie --automount --notify --tray &
