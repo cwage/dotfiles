@@ -3,10 +3,14 @@
 # from osConfig.networking.hostName.
 #
 # dotfiles.profile selects what gets linked on top of the shared desktop:
-#   personal — personal identity (git, mail), personal ssh hosts, and personal
-#              session autostarts (.xsession.personal).
-#   work     — shared desktop only. ~/.ssh and ~/.gitconfig.local are left
-#              unmanaged so employer onboarding tooling can write to them.
+#   personal — personal identity (git, mail) and personal session autostarts
+#              (.xsession.personal).
+#   work     — shared desktop only. ~/.gitconfig.local is left unmanaged so
+#              employer onboarding tooling can write to it.
+#
+# dotfiles.ssh.personalHosts (default: on for personal, off for work) makes the
+# personal ssh hosts available without taking ownership of ~/.ssh/config, so
+# tools like `step ssh config` can keep editing that file. See below.
 { config, lib, pkgs, osConfig, ... }:
 
 let
@@ -19,6 +23,17 @@ in
     type = lib.types.enum [ "personal" "work" ];
     default = "personal";
     description = "Which set of dotfiles to link on top of the shared desktop config.";
+  };
+
+  options.dotfiles.ssh.personalHosts = lib.mkOption {
+    type = lib.types.bool;
+    default = personal;
+    defaultText = lib.literalExpression ''config.dotfiles.profile == "personal"'';
+    description = ''
+      Link the personal ssh hosts to ~/.ssh/config.d/personal and make sure
+      ~/.ssh/config includes config.d/*. ~/.ssh/config itself stays a normal
+      mutable file (not a store symlink), so other tooling can own it.
+    '';
   };
 
   config = lib.mkMerge [
@@ -119,12 +134,46 @@ in
       home.file.".muttrc".source = "${dotfilesPath}/mutt/muttrc";
       home.file.".config/mutt/mailcap".source = "${dotfilesPath}/mutt/mailcap";
 
-      # SSH - only config + config.d, not the whole directory (keys stay local)
-      home.file.".ssh/config".text = "Include config.d/*\n";
-      home.file.".ssh/config.d".source = "${dotfilesPath}/.ssh/config.d";
-
       # mpd (file only — mpd needs the directory writable for database/playlists)
       home.file.".config/mpd/mpd.conf".source = "${dotfilesPath}/.config/mpd/mpd.conf";
+    })
+
+    (lib.mkIf config.dotfiles.ssh.personalHosts {
+      # Only the one file is linked, not ~/.ssh/config.d as a whole, so other
+      # tooling can drop its own fragments alongside it (keys stay local too).
+      home.file.".ssh/config.d/personal".source = "${dotfilesPath}/.ssh/config.d/personal";
+
+      # ~/.ssh/config is deliberately NOT a home.file: `step ssh config` and
+      # similar onboarding tools create and rewrite it, and a read-only store
+      # symlink would break them (or get clobbered by them). Instead, append
+      # the Include once if it's missing and leave the rest of the file alone.
+      #
+      # `Match all` resets the context first: Include is conditional on the
+      # enclosing Host/Match block, and the existing file may well end inside
+      # one (e.g. a `Match exec ...` block). Appending at the end also means
+      # anything already in the file wins on conflicts, since ssh takes the
+      # first value it sees for each option.
+      #
+      # Runs after linkGeneration so a stale ~/.ssh/config symlink left by the
+      # old personal profile (which managed this file) has been cleaned up.
+      home.activation.sshConfigInclude = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+        sshConfig="$HOME/.ssh/config"
+        includeLine='Include config.d/*'
+        if [ -L "$sshConfig" ]; then
+          warnEcho "$sshConfig is a symlink; not touching it." \
+                   "Add '$includeLine' to it by hand for the personal ssh hosts."
+        elif ! ${pkgs.gnugrep}/bin/grep -qxF "$includeLine" "$sshConfig" 2>/dev/null; then
+          if [[ -v DRY_RUN ]]; then
+            echo "Would append '$includeLine' to $sshConfig"
+          else
+            verboseEcho "Appending '$includeLine' to $sshConfig"
+            ${pkgs.coreutils}/bin/install -d -m 700 "$HOME/.ssh"
+            [ -e "$sshConfig" ] || ${pkgs.coreutils}/bin/install -m 600 /dev/null "$sshConfig"
+            printf '\n# Personal ssh hosts (added by the dotfiles home-manager module)\nMatch all\n%s\n' \
+              "$includeLine" >> "$sshConfig"
+          fi
+        fi
+      '';
     })
   ];
 }
